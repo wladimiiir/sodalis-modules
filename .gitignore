@@ -1,0 +1,8 @@
+/event/target/**
+/folk-ensemble/target/**
+/form/target/**
+/ftp-man/target/**
+/item/target/**
+/psyche/target/**
+/service/target/**
+/**/*.iml
