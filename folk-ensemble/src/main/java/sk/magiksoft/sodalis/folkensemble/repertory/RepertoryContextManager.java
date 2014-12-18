@@ -41,7 +41,7 @@ public class RepertoryContextManager extends AbstractContextManager {
 
     @Override
     protected URL getFilterConfigFileURL() {
-        return Utils.getURL("file:data/filter/RepertoryFilter.xml");
+        return getClass().getResource("filter/RepertoryFilter.xml");
     }
 
     @Override

@@ -33,22 +33,20 @@ object EventContextManager extends AbstractContextManager {
 
   def isFullTextActive = false
 
-  override def reloadData = eventUI match {
-    case Some(eventUI) => eventUI.reload
+  override def reloadData() = eventUI match {
+    case Some(ui) => ui.reload()
     case None =>
   }
 
-  override def getFilterConfigFileURL = Utils.getURL("file:data/filter/EventFilter.xml")
+  override def getFilterConfigFileURL = getClass.getResource("filter/EventFilter.xml")
 
   def addToCalendar(field: Int, value: Int) = eventUI match {
-    case Some(eventUI) => eventUI.addToCalendar(field, value)
+    case Some(ui) => ui.addToCalendar(field, value)
     case None =>
   }
 
   override def queryChanged(event: FilterEvent) = eventUI match {
-    case Some(eventUI) => {
-      eventUI.filter(event)
-    }
+    case Some(ui) => ui.filter(event)
     case None =>
   }
 

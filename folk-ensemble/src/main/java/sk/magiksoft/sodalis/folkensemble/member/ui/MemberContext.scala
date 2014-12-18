@@ -31,14 +31,12 @@ class MemberContext extends AbstractPersonContext(MemberContextManager, new Memb
 
   override def preparePopupMenu(entities: jList[_ <: Entity]) {
     val popupMenu = this.popupMenu match {
-      case menu: JPopupMenu => {
-        menu.removeAll
+      case menu: JPopupMenu =>
+        menu.removeAll()
         menu
-      }
-      case _ => {
+      case _ =>
         this.popupMenu = new JPopupMenu
         this.popupMenu
-      }
     }
     val entityList = entities.toList
     val actions = RegistryManager.getPopupActions(entityList)

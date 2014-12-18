@@ -21,7 +21,7 @@ object PsycheDataManager extends ClientDataManager {
   def getPsychoTestCreators = psychoTestCreators.toList
 
   private def loadBasicTAEntries() =
-    JavaConversions.asScalaBuffer(ImExManager.importFile(new File("data/xml/basicTAEntries.xml")))
+    JavaConversions.asScalaBuffer(ImExManager.importFromStream(getClass.getResourceAsStream("basicTAEntries.xml")))
       .map(_.asInstanceOf[BasicTAEntry]).toList
 
   def getAperceptions: List[Aperception] = getDatabaseEntities(classOf[Aperception]).toList

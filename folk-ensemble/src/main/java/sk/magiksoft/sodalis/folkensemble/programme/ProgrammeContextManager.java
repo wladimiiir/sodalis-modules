@@ -3,7 +3,6 @@ package sk.magiksoft.sodalis.folkensemble.programme;
 import sk.magiksoft.sodalis.core.context.AbstractContextManager;
 import sk.magiksoft.sodalis.core.context.Context;
 import sk.magiksoft.sodalis.core.data.remote.server.DataManager;
-import sk.magiksoft.sodalis.core.utils.Utils;
 import sk.magiksoft.sodalis.folkensemble.programme.entity.Programme;
 import sk.magiksoft.sodalis.folkensemble.programme.ui.ProgrammeUI;
 import sk.magiksoft.sodalis.folkensemble.repertory.data.RepertoryDataManager;
@@ -41,7 +40,7 @@ public class ProgrammeContextManager extends AbstractContextManager {
 
     @Override
     protected URL getFilterConfigFileURL() {
-        return Utils.getURL("file:data/filter/ProgrammeFilter.xml");
+        return getClass().getResource("filter//ProgrammeFilter.xml");
     }
 
     @Override
