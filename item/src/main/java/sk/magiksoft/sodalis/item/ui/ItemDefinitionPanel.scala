@@ -1,9 +1,11 @@
 package sk.magiksoft.sodalis.item.ui
 
+
+import sk.magiksoft.sodalis.icon.IconManager
+
 import swing._
 import scala.swing.event.{ValueChanged, ButtonClicked}
 import sk.magiksoft.sodalis.core.utils.Functions
-import sk.magiksoft.sodalis.core.factory.IconFactory
 import sk.magiksoft.sodalis.item.presenter.Presenter
 import sk.magiksoft.sodalis.item.entity.{ItemProperty, ItemType}
 import sk.magiksoft.sodalis.item.factory.ItemPropertiesFactory
@@ -46,9 +48,9 @@ class ItemDefinitionPanel(itemTypeKey: String, itemPropertiesFactory: ItemProper
 
     add(new FlowPanel(FlowPanel.Alignment.Right)(
       new Button(Action(LocaleManager.getString("save"))(saveItemTypes)) {
-        icon = IconFactory.getInstance.getIcon("ok")
+        icon = IconManager.getInstance.getIcon("ok")
       }, new Button(Action(LocaleManager.getString("cancelAction"))(reloadItemTypes)) {
-        icon = IconFactory.getInstance.getIcon("cancel")
+        icon = IconManager.getInstance.getIcon("cancel")
       }), BorderPanel.Position.South)
 
     itemTypeComponent.setBorder(BorderFactory.createTitledBorder(LocaleManager.getString("itemTypes")))
@@ -189,7 +191,7 @@ class ItemDefinitionPanel(itemTypeKey: String, itemPropertiesFactory: ItemProper
             insets = new Insets(1, 3, 0, 5)
           })
           add(new Button(new Action(null) {
-            icon = IconFactory.getInstance.getIcon("arrowUp")
+            icon = IconManager.getInstance.getIcon("arrowUp")
             enabled = itemType.itemProperties.indexOf(itemProperty) > 0
 
             def apply() = {
@@ -207,7 +209,7 @@ class ItemDefinitionPanel(itemTypeKey: String, itemPropertiesFactory: ItemProper
             insets = new Insets(1, 3, 0, 0)
           })
           add(new Button(new Action(null) {
-            icon = IconFactory.getInstance.getIcon("arrowDown")
+            icon = IconManager.getInstance.getIcon("arrowDown")
             enabled = itemType.itemProperties.last != itemProperty
 
             def apply() = {
@@ -225,7 +227,7 @@ class ItemDefinitionPanel(itemTypeKey: String, itemPropertiesFactory: ItemProper
             insets = new Insets(1, 1, 0, 0)
           })
           add(new Button(new Action(null) {
-            icon = IconFactory.getInstance.getIcon("minus")
+            icon = IconManager.getInstance.getIcon("minus")
 
             def apply() = {
               itemType.itemProperties -= itemProperty

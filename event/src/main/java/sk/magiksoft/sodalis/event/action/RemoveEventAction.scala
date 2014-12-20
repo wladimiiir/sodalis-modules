@@ -3,11 +3,11 @@ package sk.magiksoft.sodalis.event.action
 import java.awt.event.ActionEvent
 import sk.magiksoft.sodalis.core.action.{ActionMessage, MessageAction}
 import sk.magiksoft.sodalis.event.entity.Event
+import sk.magiksoft.sodalis.icon.IconManager
 import collection.mutable.ListBuffer
 import sk.magiksoft.sodalis.core.SodalisApplication
 import javax.swing.JOptionPane
 import sk.magiksoft.sodalis.event.data.EventDataManager
-import sk.magiksoft.sodalis.core.factory.IconFactory
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.ui.ISOptionPane
 import scala.collection.JavaConversions._
@@ -16,7 +16,7 @@ import scala.collection.JavaConversions._
   * @author wladimiiir
   * @since 2011/2/16
   */
-class RemoveEventAction extends MessageAction(null, IconFactory.getInstance.getIcon("remove")) {
+class RemoveEventAction extends MessageAction(null, IconManager.getInstance.getIcon("remove")) {
   private val events = new ListBuffer[Event]
 
   def getActionMessage(objects: java.util.List[_]) = {

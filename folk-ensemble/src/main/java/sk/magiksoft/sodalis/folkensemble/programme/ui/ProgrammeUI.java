@@ -10,7 +10,7 @@ import sk.magiksoft.sodalis.core.action.ActionMessage;
 import sk.magiksoft.sodalis.core.action.MessageAction;
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyJRDataSource;
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager;
-import sk.magiksoft.sodalis.core.factory.IconFactory;
+import sk.magiksoft.sodalis.icon.IconManager;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.printing.*;
 import sk.magiksoft.sodalis.core.settings.TableSettings;
@@ -83,7 +83,7 @@ public class ProgrammeUI extends AbstractTableContext implements PropertyChangeL
         btnAdd = new JButton(new AddProgrammeAction());
         btnRemove = new JButton(new RemoveProgrammeAction());
         btnPrint = new MultiActionButton(new Action[]{new PrintAction(), new ContextPrintAction(this, new ProgrammePrintDocument())},
-                "", IconFactory.getInstance().getIcon("print"));
+                "", IconManager.getInstance().getIcon("print"));
         btnExport = new JButton(new ProgrammeExportAction());
         btnImport = new JButton(new ProgrammeImportAction());
 

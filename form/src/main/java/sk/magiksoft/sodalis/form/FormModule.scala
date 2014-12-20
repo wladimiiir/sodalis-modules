@@ -5,7 +5,7 @@ import java.util.ResourceBundle
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.module.{DynamicModule, ModuleDescriptor, AbstractModule}
-import sk.magiksoft.sodalis.core.factory.IconFactory
+import sk.magiksoft.sodalis.icon.IconManager
 
 /**
  * @author wladimiiir
@@ -14,7 +14,7 @@ import sk.magiksoft.sodalis.core.factory.IconFactory
 @DynamicModule
 class FormModule extends AbstractModule {
   private val bundleBaseName = "sk.magiksoft.sodalis.form.locale.form"
-  private lazy val moduleDescriptor = new ModuleDescriptor(IconFactory.getInstance().getIcon("eventsModule") match {
+  private lazy val moduleDescriptor = new ModuleDescriptor(IconManager.getInstance().getIcon("eventsModule") match {
     case e: ImageIcon => e
     case _ => null
   }, ResourceBundle.getBundle(bundleBaseName).getString("forms"))

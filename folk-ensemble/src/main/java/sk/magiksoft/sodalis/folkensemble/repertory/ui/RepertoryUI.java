@@ -10,7 +10,7 @@ import sk.magiksoft.sodalis.core.action.ActionMessage;
 import sk.magiksoft.sodalis.core.action.MessageAction;
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyJRDataSource;
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager;
-import sk.magiksoft.sodalis.core.factory.IconFactory;
+import sk.magiksoft.sodalis.icon.IconManager;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.printing.JRExtendedDataSource;
 import sk.magiksoft.sodalis.core.printing.TablePrintDialog;
@@ -197,7 +197,7 @@ public class RepertoryUI extends AbstractTableContext implements PropertyChangeL
     private class PrintAction extends MessageAction {
 
         public PrintAction() {
-            super("", IconFactory.getInstance().getIcon("print"));
+            super("", IconManager.getInstance().getIcon("print"));
         }
 
         @Override

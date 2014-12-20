@@ -5,7 +5,7 @@ import sk.magiksoft.sodalis.category.entity.Category;
 import sk.magiksoft.sodalis.core.action.ActionMessage;
 import sk.magiksoft.sodalis.core.action.MessageAction;
 import sk.magiksoft.sodalis.core.factory.EntityFactory;
-import sk.magiksoft.sodalis.core.factory.IconFactory;
+import sk.magiksoft.sodalis.icon.IconManager;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.ui.OkCancelDialog;
 import sk.magiksoft.sodalis.core.utils.UIUtils;
@@ -28,7 +28,7 @@ public class AddSongAction extends MessageAction {
     private SongInfoPanel songInfoPanel;
 
     public AddSongAction() {
-        super("", IconFactory.getInstance().getIcon("add"));
+        super("", IconManager.getInstance().getIcon("add"));
     }
 
     @Override

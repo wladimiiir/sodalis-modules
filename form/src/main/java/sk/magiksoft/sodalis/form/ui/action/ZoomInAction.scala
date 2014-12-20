@@ -3,8 +3,8 @@ package sk.magiksoft.sodalis.form.ui.action
 import java.awt.event.ActionEvent
 import javax.swing.Action
 import org.jhotdraw.draw.DrawingEditor
-import sk.magiksoft.sodalis.core.factory.IconFactory
 import org.jhotdraw.draw.action.AbstractDrawingEditorAction
+import sk.magiksoft.sodalis.icon.IconManager
 
 /**
  * @author wladimiiir
@@ -14,7 +14,7 @@ import org.jhotdraw.draw.action.AbstractDrawingEditorAction
 class ZoomInAction(editor: DrawingEditor) extends AbstractDrawingEditorAction(editor) {
   var scaleMultiplier = 1.1;
 
-  putValue(Action.SMALL_ICON, IconFactory.getInstance.getIcon("zoomIn"))
+  putValue(Action.SMALL_ICON, IconManager.getInstance.getIcon("zoomIn"))
   putValue(Action.NAME, "")
 
   def actionPerformed(e: ActionEvent): Unit = {

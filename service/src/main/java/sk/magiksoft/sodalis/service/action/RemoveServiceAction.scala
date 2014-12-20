@@ -2,6 +2,7 @@ package sk.magiksoft.sodalis.service.action
 
 import java.awt.event.ActionEvent
 import java.util.List
+import sk.magiksoft.sodalis.icon.IconManager
 import sk.magiksoft.sodalis.service.entity.Service
 import collection.JavaConversions._
 import collection.mutable.{Buffer, ListBuffer}
@@ -11,7 +12,6 @@ import javax.swing.JOptionPane
 import sk.magiksoft.sodalis.service.data.ServiceDataManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.ui.ISOptionPane
-import sk.magiksoft.sodalis.core.factory.IconFactory
 import java.util
 
 /**
@@ -19,7 +19,7 @@ import java.util
  * @since 2011/3/10
  */
 
-class RemoveServiceAction extends MessageAction(IconFactory.getInstance.getIcon("remove")) {
+class RemoveServiceAction extends MessageAction(IconManager.getInstance.getIcon("remove")) {
   private val acts = new ListBuffer[Service]
 
   def getActionMessage(objects: util.List[_]) = {

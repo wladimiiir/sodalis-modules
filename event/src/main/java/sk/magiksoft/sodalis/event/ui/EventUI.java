@@ -15,7 +15,7 @@ import sk.magiksoft.sodalis.core.entity.Entity;
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyJRDataSource;
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager;
 import sk.magiksoft.sodalis.core.factory.ColorList;
-import sk.magiksoft.sodalis.core.factory.IconFactory;
+import sk.magiksoft.sodalis.icon.IconManager;
 import sk.magiksoft.sodalis.core.filter.action.FilterEvent;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.printing.DefaultSettingsTableSettingsListener;
@@ -834,7 +834,7 @@ public class EventUI extends AbstractContext implements PropertyChangeListener, 
 
     private class PrintEventsAction extends MessageAction {
         private PrintEventsAction() {
-            super(null, IconFactory.getInstance().getIcon("print"));
+            super(null, IconManager.getInstance().getIcon("print"));
         }
 
         @Override

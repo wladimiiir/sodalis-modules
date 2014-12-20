@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent
 import java.util.List
 
 import sk.magiksoft.sodalis.core.action.{ActionMessage, MessageAction}
-import sk.magiksoft.sodalis.core.factory.IconFactory
 import sk.magiksoft.sodalis.core.locale.LocaleManager
+import sk.magiksoft.sodalis.icon.IconManager
 import sk.magiksoft.sodalis.psyche.ui.TestCreationDialog
 
 /**
@@ -13,7 +13,7 @@ import sk.magiksoft.sodalis.psyche.ui.TestCreationDialog
  * @since 2011/5/13
  */
 
-class AddPsychoTestAction extends MessageAction(IconFactory.getInstance().getIcon("add")) {
+class AddPsychoTestAction extends MessageAction(IconManager.getInstance().getIcon("add")) {
   def getActionMessage(objects: List[_]) = new ActionMessage(true, LocaleManager.getString("addPsychoTest"))
 
   def actionPerformed(e: ActionEvent) {

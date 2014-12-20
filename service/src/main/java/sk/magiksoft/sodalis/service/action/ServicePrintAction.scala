@@ -2,6 +2,7 @@ package sk.magiksoft.sodalis.service.action
 
 import java.awt.event.ActionEvent
 import java.util.{List => jList}
+import sk.magiksoft.sodalis.icon.IconManager
 import sk.magiksoft.sodalis.service.ui.ServiceContext
 import sk.magiksoft.sodalis.core.action.{ActionMessage, MessageAction}
 import sk.magiksoft.sodalis.settings.ServiceSettings
@@ -15,14 +16,13 @@ import sk.magiksoft.sodalis.core.table.ObjectTableModel
 import sk.magiksoft.sodalis.core.printing.TableColumnWrapper.Alignment
 import sk.magiksoft.sodalis.category.report.CategoryWrapperDataSource
 import sk.magiksoft.sodalis.core.locale.LocaleManager
-import sk.magiksoft.sodalis.core.factory.IconFactory
 
 /**
  * @author wladimiiir
  * @since 2011/3/11
  */
 
-class ServicePrintAction(context: ServiceContext) extends MessageAction(IconFactory.getInstance.getIcon("print")) {
+class ServicePrintAction(context: ServiceContext) extends MessageAction(IconManager.getInstance.getIcon("print")) {
   def getActionMessage(objects: jList[_]) = new ActionMessage(true, LocaleManager.getString("print"))
 
   def actionPerformed(e: ActionEvent) {

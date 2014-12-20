@@ -9,9 +9,10 @@ import sk.magiksoft.sodalis.core.module.{DynamicModule, ModuleDescriptor, Abstra
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.category.CategoryManager
-import sk.magiksoft.sodalis.core.factory.{IconFactory, EntityFactory}
+import sk.magiksoft.sodalis.core.factory.EntityFactory
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
 import sk.magiksoft.sodalis.core.imex.ImExManager
+import sk.magiksoft.sodalis.icon.IconManager
 import sk.magiksoft.sodalis.person.data.PersonWrapperDynamicCategory
 import sk.magiksoft.sodalis.person.entity.PersonWrapper
 import collection.JavaConversions._
@@ -28,8 +29,10 @@ import java.lang.String
 @DynamicModule
 class RepertoryModule extends AbstractModule {
   private val bundleBaseName = "sk.magiksoft.sodalis.folkensemble.locale.repertory"
-  private lazy val moduleDescriptor = new ModuleDescriptor(IconFactory.getInstance.getIcon("repertoryModule").asInstanceOf[ImageIcon],
-    ResourceBundle.getBundle(bundleBaseName).getString("repertory.moduleName"))
+  private lazy val moduleDescriptor = new ModuleDescriptor(
+    new ImageIcon(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/icon/repertory.png")),
+    ResourceBundle.getBundle(bundleBaseName).getString("repertory.moduleName")
+  )
 
   private lazy val dynamicCategories = createDynamicCategories
 

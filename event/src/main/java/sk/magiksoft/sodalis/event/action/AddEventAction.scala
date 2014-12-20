@@ -5,10 +5,11 @@ import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.ui.controlpanel.InfoPanel
 import sk.magiksoft.sodalis.core.utils.Conversions._
 import sk.magiksoft.sodalis.event.ui.EventControlPanel
-import sk.magiksoft.sodalis.core.factory.{EntityFactory, IconFactory}
+import sk.magiksoft.sodalis.core.factory.EntityFactory
 import sk.magiksoft.sodalis.event.settings.EventSettings
 import sk.magiksoft.sodalis.event.data.EventDataManager
 import sk.magiksoft.sodalis.event.entity.{EventType, Event}
+import sk.magiksoft.sodalis.icon.IconManager
 import collection.JavaConversions._
 import java.util.{List, Calendar}
 import sk.magiksoft.sodalis.core.action.{ActionMessage, MessageAction}
@@ -21,7 +22,7 @@ import sk.magiksoft.sodalis.category.CategoryDataManager
  * @author wladimiiir
  * @since 2011/2/18
  */
-class AddEventAction extends MessageAction(null, IconFactory.getInstance.getIcon("add")) {
+class AddEventAction extends MessageAction(null, IconManager.getInstance.getIcon("add")) {
   private var event: Event = _
   private var wizard: Option[Wizard] = None
 

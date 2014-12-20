@@ -28,7 +28,7 @@ object InventoryContextManager extends AbstractContextManager {
     val propertiesFactory: Option[ItemPropertiesFactory] = (SodalisApplication.get.getLicenseManager.getLicense.isRestricted("ItemDefinitionPanel")
       && !SodalisApplication.get.getLicenseManager.getLicense.isDebugMode) match {
       case true => None
-      case false => Option(new ItemPropertiesFactory(Utils.getURL("file:config/InventoryItemProperties.xml")))
+      case false => Option(new ItemPropertiesFactory(getClass.getResource("config/InventoryItemProperties.xml")))
     }
     new InventoryItemContext(propertiesFactory)
   }

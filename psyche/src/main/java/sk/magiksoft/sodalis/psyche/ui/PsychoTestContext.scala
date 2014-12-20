@@ -15,7 +15,7 @@ import javax.swing._
 import sk.magiksoft.sodalis.psyche.rorschach.ui.BlotSigningDialog
 import sk.magiksoft.sodalis.psyche.rorschach.entity.RorschachTest
 import sk.magiksoft.swing.{HideableSplitPane, ISTable}
-import sk.magiksoft.sodalis.core.factory.{IconFactory, ColorList}
+import sk.magiksoft.sodalis.core.factory.ColorList
 import sk.magiksoft.sodalis.psyche.action.{RemovePsychoTestAction, AddPsychoTestAction}
 import sk.magiksoft.sodalis.core.utils.UIUtils
 import sk.magiksoft.sodalis.core.locale.LocaleManager

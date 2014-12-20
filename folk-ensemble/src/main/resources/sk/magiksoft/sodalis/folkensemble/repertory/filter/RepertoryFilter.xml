@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE ColumnComponents SYSTEM "ColumnComponents.dtd">
+<!DOCTYPE ColumnComponents SYSTEM "/sodalis/core/filter/ColumnComponents.dtd">
 
 <ColumnComponents>
     <ColumnComponent class="sk.magiksoft.sodalis.core.filter.element.TextFieldColumnComponent">

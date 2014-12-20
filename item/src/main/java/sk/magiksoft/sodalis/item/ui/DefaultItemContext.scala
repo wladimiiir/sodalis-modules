@@ -1,5 +1,7 @@
 package sk.magiksoft.sodalis.item.ui
 
+import sk.magiksoft.sodalis.icon.IconManager
+
 import swing.event.ButtonClicked
 import sk.magiksoft.sodalis.core.entity.{Entity, DatabaseEntity}
 import sk.magiksoft.sodalis.core.data.DefaultDataManager
@@ -13,7 +15,7 @@ import collection.mutable.ListBuffer
 import sk.magiksoft.sodalis.core.ui.{ISOptionPane, AbstractContext, OkCancelDialog}
 import sk.magiksoft.sodalis.core.SodalisApplication
 import sk.magiksoft.sodalis.item.entity.{ItemPropertyValue, Item, ItemType}
-import sk.magiksoft.sodalis.core.factory.{EntityFactory, IconFactory}
+import sk.magiksoft.sodalis.core.factory.EntityFactory
 import sk.magiksoft.sodalis.item.factory.ItemPropertiesFactory
 import sk.magiksoft.sodalis.item.action.{ItemTypeImportAction, ItemTypeExportAction, ItemImportAction, ItemExportAction}
 import java.awt.{GridBagConstraints, GridBagLayout, BorderLayout}
@@ -74,7 +76,7 @@ class DefaultItemContext(itemClass: Class[_ <: Item], itemTypeKey: String, contr
   protected val mainPanel = new BorderPanel
 
   protected val addButton = new Button {
-    icon = IconFactory.getInstance.getIcon("add")
+    icon = IconManager.getInstance.getIcon("add")
     borderPainted = false
     focusable = false
     enabled = false
@@ -84,7 +86,7 @@ class DefaultItemContext(itemClass: Class[_ <: Item], itemTypeKey: String, contr
     }
   }
   protected val removeButton = new Button {
-    icon = IconFactory.getInstance.getIcon("remove")
+    icon = IconManager.getInstance.getIcon("remove")
     borderPainted = false
     focusable = false
     enabled = false
@@ -94,7 +96,7 @@ class DefaultItemContext(itemClass: Class[_ <: Item], itemTypeKey: String, contr
     }
   }
   protected val showItemDefinitionButton = new Button {
-    icon = IconFactory.getInstance.getIcon("edit")
+    icon = IconManager.getInstance.getIcon("edit")
     borderPainted = false
     focusable = false
     preferredSize = (25, 25)
@@ -118,7 +120,7 @@ class DefaultItemContext(itemClass: Class[_ <: Item], itemTypeKey: String, contr
     }
   }
   protected val printButton = new Button {
-    icon = IconFactory.getInstance.getIcon("print")
+    icon = IconManager.getInstance.getIcon("print")
     borderPainted = false
     focusable = false
     preferredSize = (25, 25)
@@ -127,7 +129,7 @@ class DefaultItemContext(itemClass: Class[_ <: Item], itemTypeKey: String, contr
     }
   }
   protected val importButton = new Button {
-    icon = IconFactory.getInstance.getIcon("import")
+    icon = IconManager.getInstance.getIcon("import")
     borderPainted = false
     focusable = false
     preferredSize = (25, 25)
@@ -142,7 +144,7 @@ class DefaultItemContext(itemClass: Class[_ <: Item], itemTypeKey: String, contr
     }
   }
   protected val exportButton = new Button {
-    icon = IconFactory.getInstance.getIcon("export")
+    icon = IconManager.getInstance.getIcon("export")
     borderPainted = false
     focusable = false
     preferredSize = (25, 25)

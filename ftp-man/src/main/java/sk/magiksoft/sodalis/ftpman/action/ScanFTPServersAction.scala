@@ -6,7 +6,7 @@ import sk.magiksoft.sodalis.ftpman.ui.FTPScanCriteriaPanel
 import sk.magiksoft.sodalis.ftpman.FTPManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.ui.OkCancelDialog
-import sk.magiksoft.sodalis.core.factory.IconFactory
+import sk.magiksoft.sodalis.icon.IconManager
 import scala.swing.Swing
 
 /**
@@ -14,7 +14,7 @@ import scala.swing.Swing
  * @since 2011/5/6
  */
 
-class ScanFTPServersAction extends AbstractAction("", IconFactory.getInstance().getIcon("scan")) {
+class ScanFTPServersAction extends AbstractAction("", IconManager.getInstance().getIcon("scan")) {
   private lazy val criteriaPanel = new FTPScanCriteriaPanel
   private lazy val dialog = new OkCancelDialog(LocaleManager.getString("scanCriteria")) {
     setMainPanel(criteriaPanel.peer)

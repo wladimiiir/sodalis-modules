@@ -7,10 +7,10 @@ import entity.FTPEntry
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.registry.RegistryManager
-import sk.magiksoft.sodalis.core.factory.IconFactory
 import sk.magiksoft.sodalis.core.module.{DynamicModule, AbstractModule, ModuleDescriptor}
 import sk.magiksoft.sodalis.category.entity.PropertyDynamicCategory
 import sk.magiksoft.sodalis.category.CategoryManager
+import sk.magiksoft.sodalis.icon.IconManager
 
 /**
  * @author wladimiiir
@@ -19,7 +19,7 @@ import sk.magiksoft.sodalis.category.CategoryManager
 @DynamicModule
 class FTPManagerModule extends AbstractModule {
   private val bundleBaseName = "sk.magiksoft.sodalis.ftpman.locale.ftpman"
-  private lazy val descriptor = new ModuleDescriptor(IconFactory.getInstance().getIcon("").asInstanceOf[ImageIcon],
+  private lazy val descriptor = new ModuleDescriptor(IconManager.getInstance().getIcon("").asInstanceOf[ImageIcon],
     ResourceBundle.getBundle(bundleBaseName).getString("ftpDirectory"))
   private lazy val dynamicCategories = createDynamicCategories
 
@@ -44,6 +44,7 @@ class FTPManagerModule extends AbstractModule {
   override def startUp(): Unit = {
     RegistryManager.registerPopupAction(classOf[FTPEntry], new RetrieveFileAction)
     LocaleManager.registerBundleBaseName(bundleBaseName)
+    IconManager.getInstance().registerIcons(getClass.getResource("icon/icon.properties"))
   }
 
   def getDataListener = FTPManager

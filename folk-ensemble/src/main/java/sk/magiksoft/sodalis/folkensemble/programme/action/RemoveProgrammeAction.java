@@ -2,7 +2,7 @@ package sk.magiksoft.sodalis.folkensemble.programme.action;
 
 import sk.magiksoft.sodalis.core.action.ActionMessage;
 import sk.magiksoft.sodalis.core.action.MessageAction;
-import sk.magiksoft.sodalis.core.factory.IconFactory;
+import sk.magiksoft.sodalis.icon.IconManager;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.ui.ISOptionPane;
 import sk.magiksoft.sodalis.folkensemble.programme.data.ProgrammeDataManager;
@@ -21,7 +21,7 @@ public class RemoveProgrammeAction extends MessageAction {
     private List<Programme> programmes;
 
     public RemoveProgrammeAction() {
-        super("", IconFactory.getInstance().getIcon("remove"));
+        super("", IconManager.getInstance().getIcon("remove"));
     }
 
     @Override

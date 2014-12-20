@@ -128,7 +128,7 @@ public class EventTypeSettingsPanel extends ItemComponent implements SettingsPan
 
         private void initInfoPanels() {
             try {
-                Document configXMLDocument = new SAXBuilder().build(SodalisApplication.get().getConfigurationXMLFile());
+                Document configXMLDocument = new SAXBuilder().build(SodalisApplication.get().getConfigurationURL());
                 List<Element> controlPanelElements = configXMLDocument.getRootElement().getChild("control_panels").getChildren("control_panel");
                 List<Element> infoPanelElements = null;
                 for (Element element : controlPanelElements) {

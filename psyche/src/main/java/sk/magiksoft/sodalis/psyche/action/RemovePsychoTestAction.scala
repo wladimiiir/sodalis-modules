@@ -2,6 +2,8 @@ package sk.magiksoft.sodalis.psyche.action
 
 import java.awt.event.ActionEvent
 import java.util.List
+import sk.magiksoft.sodalis.icon.IconManager
+
 import collection.mutable.ListBuffer
 import sk.magiksoft.sodalis.psyche.entity.PsychoTest
 import collection.JavaConversions._
@@ -9,7 +11,6 @@ import sk.magiksoft.sodalis.core.action.{MessageAction, ActionMessage}
 import sk.magiksoft.sodalis.core.ui.ISOptionPane
 import javax.swing.JOptionPane
 import sk.magiksoft.sodalis.psyche.data.PsycheDataManager
-import sk.magiksoft.sodalis.core.factory.IconFactory
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.SodalisApplication
 
@@ -18,7 +19,7 @@ import sk.magiksoft.sodalis.core.SodalisApplication
  * @since 2011/6/23
  */
 
-class RemovePsychoTestAction extends MessageAction(IconFactory.getInstance().getIcon("remove")) {
+class RemovePsychoTestAction extends MessageAction(IconManager.getInstance().getIcon("remove")) {
 
   private val tests = new ListBuffer[PsychoTest]
 

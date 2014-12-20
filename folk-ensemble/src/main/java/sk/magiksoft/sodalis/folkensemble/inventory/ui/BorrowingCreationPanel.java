@@ -3,7 +3,7 @@ package sk.magiksoft.sodalis.folkensemble.inventory.ui;
 import com.toedter.calendar.JDateChooser;
 import sk.magiksoft.sodalis.core.action.ContextTransferAction;
 import sk.magiksoft.sodalis.core.context.Context;
-import sk.magiksoft.sodalis.core.factory.IconFactory;
+import sk.magiksoft.sodalis.icon.IconManager;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.folkensemble.inventory.InventoryModule;
 import sk.magiksoft.sodalis.folkensemble.inventory.entity.Borrowing;
@@ -247,7 +247,7 @@ public class BorrowingCreationPanel extends JPanel {
         public GetMemberContextAction() {
             super(InventoryModule.class, MemberModule.class);
             this.putValue(Action.NAME, LocaleManager.getString("choose"));
-            this.putValue(Action.SMALL_ICON, IconFactory.getInstance().getIcon("pickUp"));
+            this.putValue(Action.SMALL_ICON, IconManager.getInstance().getIcon("pickUp"));
         }
 
         @Override

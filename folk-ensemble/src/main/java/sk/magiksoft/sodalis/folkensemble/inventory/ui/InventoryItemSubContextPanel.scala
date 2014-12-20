@@ -17,7 +17,7 @@ class InventoryItemSubContextPanel(itemTypesKey: String) extends ItemSubContextP
     initCategoryTreeComponent(classOf[InventoryModule])
     categoryTreeComponent.get.addTreeSelectionListener(new TreeSelectionListener {
       def valueChanged(e: TreeSelectionEvent) = {
-        currentObjectChanged
+        currentObjectChanged()
       }
     })
   }
@@ -26,7 +26,7 @@ class InventoryItemSubContextPanel(itemTypesKey: String) extends ItemSubContextP
     initCategoryTreeComponent(classOf[InventoryModule])
     categoryTreeComponent.get.addTreeSelectionListener(new TreeSelectionListener {
       def valueChanged(e: TreeSelectionEvent) = {
-        currentObjectChanged
+        currentObjectChanged()
       }
     })
   }

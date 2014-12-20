@@ -1,6 +1,6 @@
 package sk.magiksoft.sodalis.event.ui;
 
-import sk.magiksoft.sodalis.core.factory.IconFactory;
+import sk.magiksoft.sodalis.icon.IconManager;
 import sk.magiksoft.sodalis.event.entity.Event;
 
 import javax.swing.*;
@@ -13,7 +13,7 @@ import java.text.DateFormat;
 public class EventPanel extends JComponent {
 
     private static final DateFormat TIME_FORMAT = DateFormat.getTimeInstance(DateFormat.SHORT);
-    private static final Image REPEATING_IMAGE = ((ImageIcon) IconFactory.getInstance().getIcon("repeatEvent")).getImage();
+    private static final Image REPEATING_IMAGE = ((ImageIcon) IconManager.getInstance().getIcon("repeatEvent")).getImage();
 
     private Event event;
     private boolean selected = false;

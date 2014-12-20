@@ -8,7 +8,7 @@ import sk.magiksoft.sodalis.service.{ServiceContextManager, ServiceModule}
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import java.awt.{GridBagLayout, GridBagConstraints, BorderLayout}
 import swing.Action
-import sk.magiksoft.sodalis.core.factory.{IconFactory, ColorList}
+import sk.magiksoft.sodalis.core.factory.ColorList
 import sk.magiksoft.sodalis.service.action.{ServicePrintAction, RemoveServiceAction, AddServiceAction}
 import javax.swing._
 import sk.magiksoft.sodalis.category.ui.CategoryTreeComboBox

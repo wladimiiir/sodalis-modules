@@ -6,10 +6,11 @@ import entity.property.ProgrammePropertyTranslator
 import entity.{ProgrammeSong, ProgrammeHistoryData, Programme}
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.module.{DynamicModule, ModuleDescriptor, AbstractModule}
-import sk.magiksoft.sodalis.core.factory.{IconFactory, EntityFactory}
+import sk.magiksoft.sodalis.core.factory.EntityFactory
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
 import sk.magiksoft.sodalis.category.CategoryManager
+import sk.magiksoft.sodalis.icon.IconManager
 import sk.magiksoft.sodalis.person.data.PersonWrapperDynamicCategory
 import sk.magiksoft.sodalis.person.entity.PersonWrapper
 import collection.JavaConversions._
@@ -22,8 +23,10 @@ import sk.magiksoft.sodalis.category.entity.{EntityDynamicCategory, Category, Ca
 @DynamicModule
 class ProgrammeModule extends AbstractModule {
   private val bundleBaseName = "sk.magiksoft.sodalis.folkensemble.locale.programme"
-  private lazy val moduleDescriptor = new ModuleDescriptor(IconFactory.getInstance.getIcon("programmeModule").asInstanceOf[ImageIcon],
-    ResourceBundle.getBundle(bundleBaseName).getString("programme.moduleName"))
+  private lazy val moduleDescriptor = new ModuleDescriptor(
+    new ImageIcon(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/icon/programme.png")),
+    ResourceBundle.getBundle(bundleBaseName).getString("programme.moduleName")
+  )
 
   private lazy val dynamicCategories = createDynamicCategories
 

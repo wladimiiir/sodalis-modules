@@ -5,10 +5,10 @@ import java.util.ResourceBundle
 import entity.property.ServicePropertyTranslator
 import entity.Service
 import sk.magiksoft.sodalis.core.module.{DynamicModule, AbstractModule, ModuleDescriptor}
-import sk.magiksoft.sodalis.core.factory.IconFactory
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
+import sk.magiksoft.sodalis.icon.IconManager
 
 /**
  * @author wladimiiir
@@ -17,12 +17,13 @@ import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
 @DynamicModule
 class ServiceModule extends AbstractModule {
   private val bundleBaseName = "sk.magiksoft.sodalis.service.locale.service"
-  private lazy val moduleDescriptor = new ModuleDescriptor(IconFactory.getInstance.getIcon("services").asInstanceOf[ImageIcon],
+  private lazy val moduleDescriptor = new ModuleDescriptor(IconManager.getInstance.getIcon("services").asInstanceOf[ImageIcon],
     ResourceBundle.getBundle(bundleBaseName).getString("services"))
 
   override def startUp(): Unit = {
     LocaleManager.registerBundleBaseName(bundleBaseName)
     EntityPropertyTranslatorManager.registerTranslator(classOf[Service], new ServicePropertyTranslator)
+    IconManager.getInstance().registerIcons(getClass.getResource("icon/icon.properties"))
   }
 
   def getDataListener = ServiceContextManager

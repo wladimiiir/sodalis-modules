@@ -7,10 +7,11 @@ import entity.{UniversityData, EnsembleData, MemberData}
 import sk.magiksoft.sodalis.core.module.{DynamicModule, ModuleDescriptor, AbstractModule}
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.locale.LocaleManager
-import sk.magiksoft.sodalis.core.factory.{IconFactory, EntityFactory}
+import sk.magiksoft.sodalis.core.factory.EntityFactory
 import sk.magiksoft.sodalis.folkensemble.event.entity.EnsembleEventData
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
 import sk.magiksoft.sodalis.core.imex.ImExManager
+import sk.magiksoft.sodalis.icon.IconManager
 import sk.magiksoft.sodalis.person.entity.{Person, PersonWrapper, PersonHistoryData, PrivatePersonData}
 import sk.magiksoft.sodalis.person.imex.{PersonWrapperImportResolver, PersonImportResolver}
 import collection.JavaConversions
@@ -34,8 +35,10 @@ import sk.magiksoft.sodalis.person.PersonModule
 
 @DynamicModule
 class MemberModule extends AbstractModule with PersonModule {
-  private lazy val moduleDescriptor = new ModuleDescriptor(IconFactory.getInstance().getIcon("folkEnsembleMemberModule").asInstanceOf[ImageIcon],
-    LocaleManager.getString("members"))
+  private lazy val moduleDescriptor = new ModuleDescriptor(
+    new ImageIcon(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/icon/folkMember2.png")),
+    LocaleManager.getString("members")
+  )
   private lazy val dynamicCategories = createDynamicCategories
 
   private def createDynamicCategories = {
@@ -79,6 +82,7 @@ class MemberModule extends AbstractModule with PersonModule {
     EntityPropertyTranslatorManager.registerTranslator(classOf[Person], new MemberPropertyTranslator)
     ImExManager.registerImportProcessor(classOf[Person], new PersonImportResolver)
     ImExManager.registerImportProcessor(classOf[PersonWrapper], new PersonWrapperImportResolver)
+    IconManager.getInstance().registerIcons(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/icon/icons.properties"))
   }
 
   def getDataListener = MemberContextManager

@@ -1,7 +1,7 @@
 package sk.magiksoft.sodalis.event.ui;
 
 import sk.magiksoft.sodalis.core.factory.ColorList;
-import sk.magiksoft.sodalis.core.factory.IconFactory;
+import sk.magiksoft.sodalis.icon.IconManager;
 import sk.magiksoft.sodalis.event.entity.Event;
 
 import javax.swing.*;
@@ -79,7 +79,7 @@ public class EventListCellRenderer extends DefaultListCellRenderer {
         private JLabel lblTime = new JLabel();
         private JLabel lblDate = new JLabel();
         private JLabel lblEventName = new JLabel();
-        private JLabel lblRepeating = new JLabel(IconFactory.getInstance().getIcon("repeatEvent"));
+        private JLabel lblRepeating = new JLabel(IconManager.getInstance().getIcon("repeatEvent"));
         private Color color;
 
         public EventCellPanel() {

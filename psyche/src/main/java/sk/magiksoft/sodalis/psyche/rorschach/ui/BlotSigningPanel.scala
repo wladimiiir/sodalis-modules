@@ -4,6 +4,7 @@ import javax.swing.BorderFactory
 import java.awt.Color
 import org.hibernate.Hibernate
 import sk.magiksoft.sodalis.core.data.DefaultDataManager
+import sk.magiksoft.sodalis.icon.IconManager
 import sk.magiksoft.sodalis.psyche.data.PsycheDataManager
 import java.awt.image.BufferedImage
 import scala.swing.ListView.{Renderer, IntervalMode}
@@ -23,7 +24,6 @@ import sk.magiksoft.sodalis.psyche.rorschach.event.TestResultChanged
 import sk.magiksoft.sodalis.psyche.rorschach.event.BlotSigningChanged
 import sk.magiksoft.sodalis.psyche.rorschach.event.SigningMethodChanged
 import sk.magiksoft.sodalis.psyche.rorschach.event.BlotAnswerChanged
-import sk.magiksoft.sodalis.core.factory.IconFactory
 import scala.swing.BorderPanel.Position
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import scala.swing.GridBagPanel.{Anchor, Fill}
@@ -100,13 +100,13 @@ class BlotSigningPanel extends GridBagPanel {
       val previousButton = new Button(Action("") {
         publishEvent(new RorschachBlotChanged(rorschachBlots(currentBlot.index - 2)))
       }) {
-        icon = IconFactory.getInstance().getIcon("previous")
+        icon = IconManager.getInstance().getIcon("previous")
         focusPainted = false
       }
       val nextButton = new Button(Action("") {
         publishEvent(new RorschachBlotChanged(rorschachBlots(currentBlot.index)))
       }) {
-        icon = IconFactory.getInstance().getIcon("next")
+        icon = IconManager.getInstance().getIcon("next")
         focusPainted = false
       }
       add(new BorderPanel {

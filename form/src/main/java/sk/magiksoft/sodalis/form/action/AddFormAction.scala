@@ -6,9 +6,10 @@ import sk.magiksoft.sodalis.core.action.{ActionMessage, MessageAction}
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.form.ui.FormInfoPanel
 import sk.magiksoft.sodalis.form.entity.Form
+import sk.magiksoft.sodalis.icon.IconManager
 import swing.Swing
 import sk.magiksoft.sodalis.form.FormDataManager
-import sk.magiksoft.sodalis.core.factory.{IconFactory, EntityFactory}
+import sk.magiksoft.sodalis.core.factory.EntityFactory
 import sk.magiksoft.sodalis.core.utils.UIUtils
 import sk.magiksoft.sodalis.core.ui.OkCancelDialog
 import sk.magiksoft.sodalis.core.SodalisApplication
@@ -18,7 +19,7 @@ import sk.magiksoft.sodalis.core.SodalisApplication
  * @since 2010/8/6
  */
 
-class AddFormAction extends MessageAction(null, IconFactory.getInstance.getIcon("add")) {
+class AddFormAction extends MessageAction(null, IconManager.getInstance.getIcon("add")) {
   private var formDialog: Option[OkCancelDialog] = None
   private var formInfoPanel: Option[FormInfoPanel] = None
 

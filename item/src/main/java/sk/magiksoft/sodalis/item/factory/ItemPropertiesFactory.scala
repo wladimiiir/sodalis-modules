@@ -18,7 +18,7 @@ class ItemPropertiesFactory(definitionFileURL: URL) {
 
   parseItemProperties
 
-  private def parseItemProperties = {
+  private def parseItemProperties() = {
     val document = new SAXReader().read(definitionFileURL)
     val rootElement = document.getRootElement
     val elements = JavaConversions.asScalaBuffer(rootElement.elements("item_property").asInstanceOf[java.util.List[Element]])

@@ -4,13 +4,13 @@ import java.util.List
 import java.awt.event.ActionEvent
 import sk.magiksoft.sodalis.form.entity.Form
 import sk.magiksoft.sodalis.core.action.{ActionMessage, MessageAction}
+import sk.magiksoft.sodalis.icon.IconManager
 import collection.mutable.ListBuffer
 import javax.swing.JOptionPane
 import sk.magiksoft.sodalis.form.FormDataManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.SodalisApplication
 import sk.magiksoft.sodalis.core.ui.ISOptionPane
-import sk.magiksoft.sodalis.core.factory.IconFactory
 import scala.collection.mutable
 import scala.collection.JavaConversions._
 
@@ -19,7 +19,7 @@ import scala.collection.JavaConversions._
  * @since 2010/8/9
  */
 
-class RemoveFormAction extends MessageAction(null, IconFactory.getInstance.getIcon("remove")) {
+class RemoveFormAction extends MessageAction(null, IconManager.getInstance.getIcon("remove")) {
   private var forms: ListBuffer[Form] = new ListBuffer[Form]
 
   def getActionMessage(objects: List[_]) = {
