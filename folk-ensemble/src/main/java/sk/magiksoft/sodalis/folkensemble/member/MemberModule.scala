@@ -4,7 +4,8 @@ import action.{RemoveMemberAction, AddMemberAction}
 import data.EnsembleGroupDynamicCategory
 import entity.property.MemberPropertyTranslator
 import entity.{UniversityData, EnsembleData, MemberData}
-import sk.magiksoft.sodalis.core.module.{DynamicModule, ModuleDescriptor, AbstractModule}
+import sk.magiksoft.sodalis.core.data.DBManager
+import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.factory.EntityFactory
@@ -33,7 +34,7 @@ import sk.magiksoft.sodalis.person.PersonModule
  * @since 2011/3/22
  */
 
-@DynamicModule
+@VisibleModule
 class MemberModule extends AbstractModule with PersonModule {
   private lazy val moduleDescriptor = new ModuleDescriptor(
     new ImageIcon(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/icon/folkMember2.png")),
@@ -75,10 +76,8 @@ class MemberModule extends AbstractModule with PersonModule {
 
   override def startUp(): Unit = {
     LocaleManager.registerBundleBaseName("sk.magiksoft.sodalis.folkensemble.locale.member")
-    LocaleManager.registerBundleBaseName("sk.magiksoft.sodalis.folkensemble.locale.event")
 
     EntityFactory.getInstance.registerEntityProperties(classOf[Person], classOf[PrivatePersonData], classOf[PersonHistoryData], classOf[MemberData], classOf[UniversityData], classOf[EnsembleData])
-    EntityFactory.getInstance.registerEntityProperties(classOf[Event], classOf[EnsembleEventData])
     EntityPropertyTranslatorManager.registerTranslator(classOf[Person], new MemberPropertyTranslator)
     ImExManager.registerImportProcessor(classOf[Person], new PersonImportResolver)
     ImExManager.registerImportProcessor(classOf[PersonWrapper], new PersonWrapperImportResolver)
@@ -96,5 +95,9 @@ class MemberModule extends AbstractModule with PersonModule {
       _.refresh()
     }
     super.getDynamicCategories ++ dynamicCategories
+  }
+
+  override def registerDBResources(manager: DBManager): Unit = {
+    manager.getConfiguration.addURL(getClass.getResource("data/mapping/ensemble.hbm.xml"))
   }
 }

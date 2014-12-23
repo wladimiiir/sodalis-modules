@@ -5,9 +5,10 @@ import java.util.ResourceBundle
 import action.RetrieveFileAction
 import entity.FTPEntry
 import javax.swing.ImageIcon
+import sk.magiksoft.sodalis.core.data.DBManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.registry.RegistryManager
-import sk.magiksoft.sodalis.core.module.{DynamicModule, AbstractModule, ModuleDescriptor}
+import sk.magiksoft.sodalis.core.module.{VisibleModule, AbstractModule, ModuleDescriptor}
 import sk.magiksoft.sodalis.category.entity.PropertyDynamicCategory
 import sk.magiksoft.sodalis.category.CategoryManager
 import sk.magiksoft.sodalis.icon.IconManager
@@ -16,7 +17,7 @@ import sk.magiksoft.sodalis.icon.IconManager
  * @author wladimiiir
  * @since 2011/5/6
  */
-@DynamicModule
+@VisibleModule
 class FTPManagerModule extends AbstractModule {
   private val bundleBaseName = "sk.magiksoft.sodalis.ftpman.locale.ftpman"
   private lazy val descriptor = new ModuleDescriptor(IconManager.getInstance().getIcon("").asInstanceOf[ImageIcon],
@@ -58,5 +59,9 @@ class FTPManagerModule extends AbstractModule {
       _.refresh()
     }
     super.getDynamicCategories ++ dynamicCategories
+  }
+
+  override def registerDBResources(manager: DBManager): Unit = {
+    manager.getConfiguration.addURL(getClass.getResource("data/mapping/ftpman.hbm.xml")
   }
 }

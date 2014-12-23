@@ -3,7 +3,8 @@ package sk.magiksoft.sodalis.folkensemble.inventory
 import java.util.ResourceBundle
 
 import entity.{InventoryHistoryData, BorrowingInventoryItemData, InventoryItem}
-import sk.magiksoft.sodalis.core.module.{DynamicModule, AbstractModule, ModuleDescriptor}
+import sk.magiksoft.sodalis.core.data.DBManager
+import sk.magiksoft.sodalis.core.module.{VisibleModule, AbstractModule, ModuleDescriptor}
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.category.entity.Category
@@ -17,7 +18,7 @@ import sk.magiksoft.sodalis.core.factory.EntityFactory
  * @since 2010/5/20
  */
 
-@DynamicModule
+@VisibleModule
 class InventoryModule extends AbstractModule {
   private lazy val moduleDescriptor = new ModuleDescriptor(
     new ImageIcon(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/icon/inventory.png")),
@@ -47,4 +48,8 @@ class InventoryModule extends AbstractModule {
     super.getDynamicCategories ++ dynamicCategories
   }
 
+  override def registerDBResources(manager: DBManager): Unit = {
+    manager.getConfiguration.addURL(getClass.getResource("/sk/magiksoft/sodalis/item/data/mapping/item.hbm.xml"))
+    manager.getConfiguration.addURL(getClass.getResource("data/mapping/inventory.hbm.xml"))
+  }
 }

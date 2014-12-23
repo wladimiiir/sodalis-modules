@@ -6,3 +6,4 @@
 /psyche/target/**
 /service/target/**
 /**/*.iml
+/**/.idea/**

@@ -5,7 +5,8 @@ import java.util.ResourceBundle
 import entity.property.SongPropertyTranslator
 import entity.{SongHistoryData, Song}
 import imex.SongImportResolver
-import sk.magiksoft.sodalis.core.module.{DynamicModule, ModuleDescriptor, AbstractModule}
+import sk.magiksoft.sodalis.core.data.DBManager
+import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.category.CategoryManager
@@ -26,7 +27,7 @@ import java.lang.String
  * @author wladimiiir
  * @since 2011/4/22
  */
-@DynamicModule
+@VisibleModule
 class RepertoryModule extends AbstractModule {
   private val bundleBaseName = "sk.magiksoft.sodalis.folkensemble.locale.repertory"
   private lazy val moduleDescriptor = new ModuleDescriptor(
@@ -126,5 +127,9 @@ class RepertoryModule extends AbstractModule {
       _.refresh()
     }
     super.getDynamicCategories ++ dynamicCategories
+  }
+
+  override def registerDBResources(manager: DBManager): Unit = {
+    manager.getConfiguration.addURL(getClass.getResource("data/mapping/repertory.hbm.xml"))
   }
 }

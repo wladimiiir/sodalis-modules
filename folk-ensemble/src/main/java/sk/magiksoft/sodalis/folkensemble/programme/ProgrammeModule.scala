@@ -4,8 +4,9 @@ import java.util.ResourceBundle
 
 import entity.property.ProgrammePropertyTranslator
 import entity.{ProgrammeSong, ProgrammeHistoryData, Programme}
+import sk.magiksoft.sodalis.core.data.DBManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
-import sk.magiksoft.sodalis.core.module.{DynamicModule, ModuleDescriptor, AbstractModule}
+import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
 import sk.magiksoft.sodalis.core.factory.EntityFactory
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
@@ -20,7 +21,7 @@ import sk.magiksoft.sodalis.category.entity.{EntityDynamicCategory, Category, Ca
  * @author wladimiiir
  * @since 2011/4/22
  */
-@DynamicModule
+@VisibleModule
 class ProgrammeModule extends AbstractModule {
   private val bundleBaseName = "sk.magiksoft.sodalis.folkensemble.locale.programme"
   private lazy val moduleDescriptor = new ModuleDescriptor(
@@ -101,5 +102,9 @@ class ProgrammeModule extends AbstractModule {
       _.refresh()
     }
     super.getDynamicCategories ++ dynamicCategories
+  }
+
+  override def registerDBResources(manager: DBManager): Unit = {
+    manager.getConfiguration.addURL(getClass.getResource("data/mapping/programme.hbm.xml"))
   }
 }

@@ -11,14 +11,14 @@
     </parent>
 
     <groupId>sk.magiksoft.sodalis</groupId>
-    <artifactId>ftp-man</artifactId>
+    <artifactId>sodalis-ftp-man</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>FTP Manager</name>
 
     <dependencies>
         <dependency>
             <groupId>sk.magiksoft.sodalis</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>sodalis-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

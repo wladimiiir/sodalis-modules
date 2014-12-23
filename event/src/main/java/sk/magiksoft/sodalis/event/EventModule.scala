@@ -5,7 +5,7 @@ import java.util.ResourceBundle
 import entity.property.EventPropertyTranslator
 import entity.{Event, EventEntityData, EventHistoryData}
 import sk.magiksoft.sodalis.core.locale.LocaleManager
-import sk.magiksoft.sodalis.core.module.{DynamicModule, ModuleDescriptor, AbstractModule}
+import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.factory.EntityFactory
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
@@ -16,7 +16,7 @@ import sk.magiksoft.sodalis.person.entity.Person
  * @author wladimiiir
  * @since 2011/2/26
  */
-@DynamicModule
+@VisibleModule
 class EventModule extends AbstractModule {
   private val bundleBaseName = "sk.magiksoft.sodalis.event.locale.event"
   private lazy val moduleDescriptor = new ModuleDescriptor(new ImageIcon(getClass.getResource("icon/events2.png")),
