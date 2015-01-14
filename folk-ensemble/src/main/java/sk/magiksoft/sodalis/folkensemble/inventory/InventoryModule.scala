@@ -1,17 +1,13 @@
 package sk.magiksoft.sodalis.folkensemble.inventory
 
-import java.util.ResourceBundle
-
-import entity.{InventoryHistoryData, BorrowingInventoryItemData, InventoryItem}
-import sk.magiksoft.sodalis.core.data.DBManager
-import sk.magiksoft.sodalis.core.module.{VisibleModule, AbstractModule, ModuleDescriptor}
-import sk.magiksoft.sodalis.core.locale.LocaleManager
 import javax.swing.ImageIcon
-import sk.magiksoft.sodalis.category.entity.Category
-import sk.magiksoft.sodalis.icon.IconManager
-import collection.JavaConversions._
-import sk.magiksoft.sodalis.folkensemble.inventory.data.BorrowerDynamicCategory
+
+import org.hibernate.cfg.Configuration
 import sk.magiksoft.sodalis.core.factory.EntityFactory
+import sk.magiksoft.sodalis.core.locale.LocaleManager
+import sk.magiksoft.sodalis.core.module.{AbstractModule, ModuleDescriptor, VisibleModule}
+import sk.magiksoft.sodalis.folkensemble.inventory.data.BorrowerDynamicCategory
+import sk.magiksoft.sodalis.folkensemble.inventory.entity.{BorrowingInventoryItemData, InventoryHistoryData, InventoryItem}
 
 /**
  * @author wladimiiir
@@ -48,8 +44,8 @@ class InventoryModule extends AbstractModule {
     super.getDynamicCategories ++ dynamicCategories
   }
 
-  override def registerDBResources(manager: DBManager): Unit = {
-    manager.getConfiguration.addURL(getClass.getResource("/sk/magiksoft/sodalis/item/data/mapping/item.hbm.xml"))
-    manager.getConfiguration.addURL(getClass.getResource("data/mapping/inventory.hbm.xml"))
+  override def initConfiguration(configuration: Configuration): Unit = {
+    configuration.addURL(getClass.getResource("/sk/magiksoft/sodalis/item/data/mapping/item.hbm.xml"))
+    configuration.addURL(getClass.getResource("data/mapping/inventory.hbm.xml"))
   }
 }

@@ -5,6 +5,9 @@ import java.util.ResourceBundle
 import entity.property.SongPropertyTranslator
 import entity.{SongHistoryData, Song}
 import imex.SongImportResolver
+import org.hibernate.cfg.Configuration
+import org.hibernate.tool.hbm2ddl.{Target, SchemaExport}
+import sk.magiksoft.sodalis.core.SodalisApplication
 import sk.magiksoft.sodalis.core.data.DBManager
 import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
 import javax.swing.ImageIcon
@@ -129,7 +132,7 @@ class RepertoryModule extends AbstractModule {
     super.getDynamicCategories ++ dynamicCategories
   }
 
-  override def registerDBResources(manager: DBManager): Unit = {
-    manager.getConfiguration.addURL(getClass.getResource("data/mapping/repertory.hbm.xml"))
+  override def initConfiguration(configuration: Configuration): Unit = {
+    configuration.addURL(getClass.getResource("data/mapping/repertory.hbm.xml"))
   }
 }

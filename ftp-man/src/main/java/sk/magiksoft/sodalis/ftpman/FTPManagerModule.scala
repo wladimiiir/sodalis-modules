@@ -5,6 +5,7 @@ import java.util.ResourceBundle
 import action.RetrieveFileAction
 import entity.FTPEntry
 import javax.swing.ImageIcon
+import org.hibernate.cfg.Configuration
 import sk.magiksoft.sodalis.core.data.DBManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.registry.RegistryManager
@@ -61,7 +62,7 @@ class FTPManagerModule extends AbstractModule {
     super.getDynamicCategories ++ dynamicCategories
   }
 
-  override def registerDBResources(manager: DBManager): Unit = {
-    manager.getConfiguration.addURL(getClass.getResource("data/mapping/ftpman.hbm.xml")
+  override def initConfiguration(configuration: Configuration): Unit = {
+    configuration.addURL(getClass.getResource("data/mapping/ftpman.hbm.xml")
   }
 }

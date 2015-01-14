@@ -1,15 +1,15 @@
 package sk.magiksoft.sodalis.service
 
 import java.util.ResourceBundle
-
-import entity.property.ServicePropertyTranslator
-import entity.Service
-import sk.magiksoft.sodalis.core.data.DBManager
-import sk.magiksoft.sodalis.core.module.{VisibleModule, AbstractModule, ModuleDescriptor}
-import sk.magiksoft.sodalis.core.locale.LocaleManager
 import javax.swing.ImageIcon
+
+import org.hibernate.cfg.Configuration
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
+import sk.magiksoft.sodalis.core.locale.LocaleManager
+import sk.magiksoft.sodalis.core.module.{AbstractModule, ModuleDescriptor, VisibleModule}
 import sk.magiksoft.sodalis.icon.IconManager
+import sk.magiksoft.sodalis.service.entity.Service
+import sk.magiksoft.sodalis.service.entity.property.ServicePropertyTranslator
 
 /**
  * @author wladimiiir
@@ -33,7 +33,7 @@ class ServiceModule extends AbstractModule {
 
   def getModuleDescriptor = moduleDescriptor
 
-  override def registerDBResources(manager: DBManager): Unit = {
-    manager.getConfiguration.addURL(getClass.getResource("data/mapping/service.hbm.xml")
+  override def initConfiguration(configuration: Configuration): Unit = {
+    configuration.addURL(getClass.getResource("data/mapping/service.hbm.xml"))
   }
 }

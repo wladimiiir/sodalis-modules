@@ -2,9 +2,9 @@ package sk.magiksoft.sodalis.psyche
 
 import java.util.ResourceBundle
 
-import sk.magiksoft.sodalis.core.data.DBManager
-import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
+import org.hibernate.cfg.Configuration
 import sk.magiksoft.sodalis.core.locale.LocaleManager
+import sk.magiksoft.sodalis.core.module.{AbstractModule, ModuleDescriptor, VisibleModule}
 
 /**
  * @author wladimiiir
@@ -26,11 +26,7 @@ class PsychoTestModule extends AbstractModule {
     LocaleManager.registerBundleBaseName(bundleBaseName)
   }
 
-  override def install(classLoader: ClassLoader): Unit = {
-    
-  }
-
-  override def registerDBResources(manager: DBManager): Unit = {
-    manager.getConfiguration.addURL(getClass.getResource("data/mapping/psyche.hbm.xml"))
+  override def initConfiguration(configuration: Configuration): Unit = {
+    configuration.addURL(getClass.getResource("data/mapping/psyche.hbm.xml"))
   }
 }

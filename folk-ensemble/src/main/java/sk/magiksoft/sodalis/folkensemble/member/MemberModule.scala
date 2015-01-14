@@ -4,6 +4,8 @@ import action.{RemoveMemberAction, AddMemberAction}
 import data.EnsembleGroupDynamicCategory
 import entity.property.MemberPropertyTranslator
 import entity.{UniversityData, EnsembleData, MemberData}
+import org.hibernate.cfg.Configuration
+import org.hibernate.tool.hbm2ddl.{Target, SchemaExport}
 import sk.magiksoft.sodalis.core.data.DBManager
 import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
 import javax.swing.ImageIcon
@@ -97,7 +99,7 @@ class MemberModule extends AbstractModule with PersonModule {
     super.getDynamicCategories ++ dynamicCategories
   }
 
-  override def registerDBResources(manager: DBManager): Unit = {
-    manager.getConfiguration.addURL(getClass.getResource("data/mapping/ensemble.hbm.xml"))
+  override def initConfiguration(configuration: Configuration): Unit = {
+    configuration.addURL(getClass.getResource("data/mapping/ensemble.hbm.xml"))
   }
 }

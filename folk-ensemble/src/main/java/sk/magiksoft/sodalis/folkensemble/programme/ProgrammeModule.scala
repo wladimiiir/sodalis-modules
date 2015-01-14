@@ -1,21 +1,21 @@
 package sk.magiksoft.sodalis.folkensemble.programme
 
 import java.util.ResourceBundle
-
-import entity.property.ProgrammePropertyTranslator
-import entity.{ProgrammeSong, ProgrammeHistoryData, Programme}
-import sk.magiksoft.sodalis.core.data.DBManager
-import sk.magiksoft.sodalis.core.locale.LocaleManager
-import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
-import sk.magiksoft.sodalis.core.factory.EntityFactory
 import javax.swing.ImageIcon
-import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
+
+import org.hibernate.cfg.Configuration
 import sk.magiksoft.sodalis.category.CategoryManager
-import sk.magiksoft.sodalis.icon.IconManager
+import sk.magiksoft.sodalis.category.entity.EntityDynamicCategory
+import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
+import sk.magiksoft.sodalis.core.factory.EntityFactory
+import sk.magiksoft.sodalis.core.locale.LocaleManager
+import sk.magiksoft.sodalis.core.module.{AbstractModule, ModuleDescriptor, VisibleModule}
+import sk.magiksoft.sodalis.folkensemble.programme.entity.property.ProgrammePropertyTranslator
+import sk.magiksoft.sodalis.folkensemble.programme.entity.{Programme, ProgrammeHistoryData, ProgrammeSong}
 import sk.magiksoft.sodalis.person.data.PersonWrapperDynamicCategory
 import sk.magiksoft.sodalis.person.entity.PersonWrapper
-import collection.JavaConversions._
-import sk.magiksoft.sodalis.category.entity.{EntityDynamicCategory, Category, Categorized}
+
+import scala.collection.JavaConversions._
 
 /**
  * @author wladimiiir
@@ -104,7 +104,7 @@ class ProgrammeModule extends AbstractModule {
     super.getDynamicCategories ++ dynamicCategories
   }
 
-  override def registerDBResources(manager: DBManager): Unit = {
-    manager.getConfiguration.addURL(getClass.getResource("data/mapping/programme.hbm.xml"))
+  override def initConfiguration(configuration: Configuration): Unit = {
+    configuration.addURL(getClass.getResource("data/mapping/programme.hbm.xml"))
   }
 }
