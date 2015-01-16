@@ -1,6 +1,7 @@
 package sk.magiksoft.sodalis.event.action
 
 import java.awt.event.ActionEvent
+import java.util
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.ui.controlpanel.InfoPanel
 import sk.magiksoft.sodalis.core.utils.Conversions._
@@ -33,7 +34,7 @@ class AddEventAction extends MessageAction(null, IconManager.getInstance.getIcon
     }
   }
 
-  def getActionMessage(objects: List[_]) = new ActionMessage(true, LocaleManager.getString("addEvent"))
+  def getActionMessage(objects: util.List[_]) = new ActionMessage(true, LocaleManager.getString("addEvent"))
 
 
   def actionPerformed(e: ActionEvent) = {
@@ -46,7 +47,7 @@ class AddEventAction extends MessageAction(null, IconManager.getInstance.getIcon
     event.setEventType(EventDataManager.getInstance.getDatabaseEntities(classOf[EventType])(0))
     for (page <- pages) {
       page.infoPanel.setupPanel(event)
-      page.infoPanel.initData
+      page.infoPanel.initData()
     }
     wizard.showWizard
   }
@@ -56,7 +57,7 @@ class AddEventAction extends MessageAction(null, IconManager.getInstance.getIcon
     wizard.setSize(740, 300)
     wizard.setLocationRelativeTo(null)
     wizard.reactions += {
-      case WizardFinished(_) => {
+      case WizardFinished(_) =>
         pages(0).infoPanel.setupObject(event)
         pages.subList(1, pages.size).filter {
           _.infoPanel.acceptObject(event)
@@ -64,7 +65,6 @@ class AddEventAction extends MessageAction(null, IconManager.getInstance.getIcon
           _.infoPanel.setupObject(event)
         }
         EventDataManager.getInstance.addDatabaseEntity(event)
-      }
     }
     this.wizard = Option(wizard)
     pages.foreach {
@@ -74,7 +74,7 @@ class AddEventAction extends MessageAction(null, IconManager.getInstance.getIcon
   }
 
   private def createEvent = {
-    val ids = EventSettings.getInstance.getValue(Settings.O_SELECTED_CATEGORIES).asInstanceOf[List[java.lang.Long]]
+    val ids = EventSettings.getInstance.getValue(Settings.O_SELECTED_CATEGORIES).asInstanceOf[util.List[java.lang.Long]]
     val categories = CategoryDataManager.getInstance.getCategories(ids)
     val event = EntityFactory.getInstance.createEntity(classOf[Event])
     event.setCategories(categories)
