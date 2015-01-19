@@ -46,6 +46,6 @@ class InventoryModule extends AbstractModule {
 
   override def initConfiguration(configuration: Configuration): Unit = {
     configuration.addURL(getClass.getResource("/sk/magiksoft/sodalis/item/data/mapping/item.hbm.xml"))
-    configuration.addURL(getClass.getResource("data/mapping/inventory.hbm.xml"))
+    configuration.addURL(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/inventory/data/mapping/inventory.hbm.xml"))
   }
 }

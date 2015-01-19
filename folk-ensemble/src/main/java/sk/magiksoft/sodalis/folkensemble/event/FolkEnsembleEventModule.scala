@@ -20,7 +20,7 @@ import sk.magiksoft.sodalis.folkensemble.event.entity.EnsembleEventData
 class FolkEnsembleEventModule extends EventModule {
   override def initConfiguration(configuration: Configuration): Unit = {
     super.initConfiguration(configuration)
-    configuration.addURL(getClass.getResource("data/mapping/ensemble_event.hbm.xml"))
+    configuration.addURL(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/event/data/mapping/ensemble_event.hbm.xml"))
   }
 
   override def startUp(): Unit = {
@@ -29,7 +29,7 @@ class FolkEnsembleEventModule extends EventModule {
     EntityFactory.getInstance.registerEntityProperties(classOf[Event], classOf[EnsembleEventData])
   }
 
-  override def install(classLoader: ClassLoader, dbManager: DBManager): Unit = {
+  override def install(dbManager: DBManager): Unit = {
     dbManager.createDBSchema(this)
   }
 }

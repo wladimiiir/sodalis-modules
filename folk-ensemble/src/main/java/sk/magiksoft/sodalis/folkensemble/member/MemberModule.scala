@@ -100,6 +100,6 @@ class MemberModule extends AbstractModule with PersonModule {
   }
 
   override def initConfiguration(configuration: Configuration): Unit = {
-    configuration.addURL(getClass.getResource("data/mapping/ensemble.hbm.xml"))
+    configuration.addURL(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/member/data/mapping/ensemble.hbm.xml"))
   }
 }

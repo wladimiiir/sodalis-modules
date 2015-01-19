@@ -105,6 +105,6 @@ class ProgrammeModule extends AbstractModule {
   }
 
   override def initConfiguration(configuration: Configuration): Unit = {
-    configuration.addURL(getClass.getResource("data/mapping/programme.hbm.xml"))
+    configuration.addURL(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/programme/data/mapping/programme.hbm.xml"))
   }
 }

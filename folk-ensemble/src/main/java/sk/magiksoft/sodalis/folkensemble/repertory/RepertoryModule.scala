@@ -133,6 +133,6 @@ class RepertoryModule extends AbstractModule {
   }
 
   override def initConfiguration(configuration: Configuration): Unit = {
-    configuration.addURL(getClass.getResource("data/mapping/repertory.hbm.xml"))
+    configuration.addURL(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/repertory/data/mapping/repertory.hbm.xml"))
   }
 }
