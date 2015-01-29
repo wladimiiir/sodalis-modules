@@ -2,7 +2,7 @@ package sk.magiksoft.sodalis.service.ui
 
 import sk.magiksoft.sodalis.core.ui.AbstractTableContext
 import sk.magiksoft.sodalis.service.entity.Service
-import sk.magiksoft.sodalis.core.ui.controlpanel.DefaultControlPanel
+import sk.magiksoft.sodalis.core.controlpanel.DefaultControlPanel
 import sk.magiksoft.swing.{HideableSplitPane, ISTable}
 import sk.magiksoft.sodalis.service.{ServiceContextManager, ServiceModule}
 import sk.magiksoft.sodalis.core.locale.LocaleManager

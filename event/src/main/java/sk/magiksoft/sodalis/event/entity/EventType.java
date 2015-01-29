@@ -59,10 +59,9 @@ public class EventType extends AbstractDatabaseEntity {
     }
 
     private List<Category> getCategories(Event event) {
-        List<Long> ids = (List<Long>) EventSettings.getInstance().getValue(EventSettings.O_SELECTED_CATEGORIES);
-        List<Category> categories = EventDataManager.getInstance().getDatabaseEntities(Category.class, ids);
-
-        return categories;
+        @SuppressWarnings("unchecked")
+        final List<Long> ids = (List<Long>) EventSettings.getInstance().getValue(EventSettings.O_SELECTED_CATEGORIES);
+        return EventDataManager.getInstance().getDatabaseEntities(Category.class, ids);
     }
 
     @Override

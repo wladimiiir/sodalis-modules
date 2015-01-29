@@ -5,6 +5,7 @@ import java.util.ResourceBundle
 import entity.property.EventPropertyTranslator
 import entity.{Event, EventEntityData, EventHistoryData}
 import org.hibernate.cfg.Configuration
+import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
 import javax.swing.ImageIcon
@@ -31,6 +32,8 @@ class EventModule extends AbstractModule {
     EntityFactory.getInstance.registerEntityProperties(classOf[Person], classOf[EventEntityData])
     EntityPropertyTranslatorManager.registerTranslator(classOf[Event], new EventPropertyTranslator)
     IconManager.getInstance().registerIcons(getClass.getResource("/sk/magiksoft/sodalis/event/icon/icons.properties"))
+
+    ControlPanelRegistry.registerInfoPanels(Event)
   }
 
   override def initConfiguration(configuration: Configuration): Unit = {

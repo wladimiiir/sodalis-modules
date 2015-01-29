@@ -6,7 +6,7 @@ import sk.magiksoft.sodalis.core.context.Context;
 import sk.magiksoft.sodalis.core.factory.ColorList;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.ui.ISOptionPane;
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.folkensemble.programme.ProgrammeModule;
 import sk.magiksoft.sodalis.folkensemble.programme.entity.Programme;
 import sk.magiksoft.sodalis.folkensemble.programme.entity.ProgrammeSong;

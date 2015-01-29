@@ -1,8 +1,8 @@
 package sk.magiksoft.sodalis.folkensemble.member.ui;
 
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
-import sk.magiksoft.sodalis.core.ui.controlpanel.InfoPanelListener;
-import sk.magiksoft.sodalis.core.ui.controlpanel.InfoPanelStateEvent;
+import sk.magiksoft.sodalis.core.controlpanel.InfoPanelListener;
+import sk.magiksoft.sodalis.core.controlpanel.InfoPanelStateEvent;
 import sk.magiksoft.sodalis.person.entity.ManagerData;
 import sk.magiksoft.sodalis.person.entity.Person;
 import sk.magiksoft.sodalis.person.ui.PersonalDataInfoPanel;

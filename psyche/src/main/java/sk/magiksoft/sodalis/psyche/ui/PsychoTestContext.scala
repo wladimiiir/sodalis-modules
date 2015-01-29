@@ -20,7 +20,7 @@ import sk.magiksoft.sodalis.psyche.action.{RemovePsychoTestAction, AddPsychoTest
 import sk.magiksoft.sodalis.core.utils.UIUtils
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.category.ui.CategoryTreeComboBox
-import sk.magiksoft.sodalis.core.ui.controlpanel.DefaultControlPanel
+import sk.magiksoft.sodalis.core.controlpanel.DefaultControlPanel
 import sk.magiksoft.sodalis.core.table.ObjectTableModel
 import sk.magiksoft.sodalis.core.settings.Settings
 import sk.magiksoft.sodalis.category.CategoryDataManager

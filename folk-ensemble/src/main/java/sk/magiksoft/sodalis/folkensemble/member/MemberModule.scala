@@ -6,14 +6,18 @@ import entity.property.MemberPropertyTranslator
 import entity.{UniversityData, EnsembleData, MemberData}
 import org.hibernate.cfg.Configuration
 import org.hibernate.tool.hbm2ddl.{Target, SchemaExport}
+import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
+import sk.magiksoft.sodalis.core.controlpanel.impl.NoteInfoPanel
 import sk.magiksoft.sodalis.core.data.DBManager
 import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.factory.EntityFactory
+import sk.magiksoft.sodalis.event.ui.EventTableInfoPanel
 import sk.magiksoft.sodalis.folkensemble.event.entity.EnsembleEventData
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
 import sk.magiksoft.sodalis.core.imex.ImExManager
+import sk.magiksoft.sodalis.folkensemble.member.ui._
 import sk.magiksoft.sodalis.icon.IconManager
 import sk.magiksoft.sodalis.person.entity.{Person, PersonWrapper, PersonHistoryData, PrivatePersonData}
 import sk.magiksoft.sodalis.person.imex.{PersonWrapperImportResolver, PersonImportResolver}
@@ -84,6 +88,18 @@ class MemberModule extends AbstractModule with PersonModule {
     ImExManager.registerImportProcessor(classOf[Person], new PersonImportResolver)
     ImExManager.registerImportProcessor(classOf[PersonWrapper], new PersonWrapperImportResolver)
     IconManager.getInstance().registerIcons(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/icon/icons.properties"))
+
+    ControlPanelRegistry.registerInfoPanels(MemberControlPanel.KEY, List(
+        classOf[MemberPersonalDataInfoPanel],
+          classOf[UniversityDataInfoPanel],
+          classOf[EnsembleDataPanel],
+          classOf[CategorizedMemberInfoPanel],
+          classOf[MemberSongInfoPanel],
+          classOf[MemberInventoryItemInfoPanel],
+          classOf[NoteInfoPanel],
+          classOf[EventTableInfoPanel],
+          classOf[MemberHistoryInfoPanel]
+    ))
   }
 
   def getDataListener = MemberContextManager

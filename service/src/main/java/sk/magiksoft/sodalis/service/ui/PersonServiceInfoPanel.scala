@@ -1,6 +1,6 @@
 package sk.magiksoft.sodalis.service.ui
 
-import sk.magiksoft.sodalis.core.ui.controlpanel.{AbstractInfoPanel, InfoPanelPublisher}
+import sk.magiksoft.sodalis.core.controlpanel.{AbstractInfoPanel, InfoPanelPublisher}
 import javax.swing.JScrollPane
 import sk.magiksoft.sodalis.service.data.ServiceDataManager
 import sk.magiksoft.sodalis.service.entity.{ServicePersonData, PersonService}

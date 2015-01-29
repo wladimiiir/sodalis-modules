@@ -5,7 +5,7 @@ import java.awt.BorderLayout
 import javax.swing.JPanel
 import scala.collection.mutable.ListBuffer
 import sk.magiksoft.sodalis.core.locale.LocaleManager
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel
 
 /**
  * @author wladimiiir

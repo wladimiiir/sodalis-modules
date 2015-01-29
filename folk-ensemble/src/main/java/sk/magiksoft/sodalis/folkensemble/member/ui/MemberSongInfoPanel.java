@@ -3,7 +3,7 @@ package sk.magiksoft.sodalis.folkensemble.member.ui;
 import sk.magiksoft.sodalis.core.action.GoToEntityAction;
 import sk.magiksoft.sodalis.core.factory.ColorList;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.folkensemble.member.data.MemberDataManager;
 import sk.magiksoft.sodalis.folkensemble.repertory.RepertoryModule;
 import sk.magiksoft.sodalis.folkensemble.repertory.entity.Song;

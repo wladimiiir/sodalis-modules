@@ -9,7 +9,7 @@ import sk.magiksoft.sodalis.core.entity.DatabaseEntity;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.ui.ISOptionPane;
 import sk.magiksoft.sodalis.core.ui.OkCancelDialog;
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.core.utils.UIUtils;
 import sk.magiksoft.sodalis.folkensemble.inventory.data.InventoryDataManager;
 import sk.magiksoft.sodalis.folkensemble.inventory.entity.Borrowing;

@@ -3,7 +3,7 @@ package sk.magiksoft.sodalis.event.ui;
 import com.toedter.calendar.JDateChooser;
 import sk.magiksoft.sodalis.core.SodalisApplication;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.event.data.EventDataManager;
 import sk.magiksoft.sodalis.event.entity.Attendee;
 import sk.magiksoft.sodalis.event.entity.Event;

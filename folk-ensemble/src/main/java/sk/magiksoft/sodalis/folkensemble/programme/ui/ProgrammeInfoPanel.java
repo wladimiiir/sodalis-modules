@@ -2,7 +2,7 @@ package sk.magiksoft.sodalis.folkensemble.programme.ui;
 
 import sk.magiksoft.sodalis.core.action.GoToEntityAction;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.folkensemble.member.MemberModule;
 import sk.magiksoft.sodalis.folkensemble.programme.entity.Programme;
 import sk.magiksoft.sodalis.person.entity.ManagerData;

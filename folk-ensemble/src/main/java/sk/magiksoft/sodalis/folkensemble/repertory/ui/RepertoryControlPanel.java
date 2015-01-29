@@ -1,6 +1,6 @@
 package sk.magiksoft.sodalis.folkensemble.repertory.ui;
 
-import sk.magiksoft.sodalis.core.ui.controlpanel.DefaultControlPanel;
+import sk.magiksoft.sodalis.core.controlpanel.DefaultControlPanel;
 import sk.magiksoft.sodalis.folkensemble.repertory.data.RepertoryDataManager;
 import sk.magiksoft.sodalis.folkensemble.repertory.entity.Song;
 

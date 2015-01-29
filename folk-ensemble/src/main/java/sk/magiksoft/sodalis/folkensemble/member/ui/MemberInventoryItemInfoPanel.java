@@ -4,7 +4,7 @@ import sk.magiksoft.sodalis.core.action.ContextTransferAction;
 import sk.magiksoft.sodalis.core.context.Context;
 import sk.magiksoft.sodalis.core.entity.DatabaseEntity;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.folkensemble.inventory.InventoryModule;
 import sk.magiksoft.sodalis.folkensemble.inventory.data.InventoryDataManager;
 import sk.magiksoft.sodalis.folkensemble.inventory.entity.Borrowing;

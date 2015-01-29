@@ -24,7 +24,7 @@ import sk.magiksoft.sodalis.core.printing.PrintPreview;
 import sk.magiksoft.sodalis.core.printing.TablePrintDialog;
 import sk.magiksoft.sodalis.core.ui.AbstractContext;
 import sk.magiksoft.sodalis.core.ui.ISOptionPane;
-import sk.magiksoft.sodalis.core.ui.controlpanel.InfoPanel;
+import sk.magiksoft.sodalis.core.controlpanel.InfoPanel;
 import sk.magiksoft.sodalis.core.utils.UIUtils;
 import sk.magiksoft.sodalis.event.EventContextManager;
 import sk.magiksoft.sodalis.event.EventModule;

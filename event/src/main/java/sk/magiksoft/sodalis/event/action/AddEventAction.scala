@@ -3,7 +3,7 @@ package sk.magiksoft.sodalis.event.action
 import java.awt.event.ActionEvent
 import java.util
 import sk.magiksoft.sodalis.core.locale.LocaleManager
-import sk.magiksoft.sodalis.core.ui.controlpanel.InfoPanel
+import sk.magiksoft.sodalis.core.controlpanel.InfoPanel
 import sk.magiksoft.sodalis.core.utils.Conversions._
 import sk.magiksoft.sodalis.event.ui.EventControlPanel
 import sk.magiksoft.sodalis.core.factory.EntityFactory

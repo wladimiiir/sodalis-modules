@@ -63,6 +63,6 @@ class FTPManagerModule extends AbstractModule {
   }
 
   override def initConfiguration(configuration: Configuration): Unit = {
-    configuration.addURL(getClass.getResource("data/mapping/ftpman.hbm.xml")
+    configuration.addURL(getClass.getResource("data/mapping/ftpman.hbm.xml"))
   }
 }

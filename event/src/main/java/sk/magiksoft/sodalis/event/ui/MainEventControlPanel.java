@@ -1,6 +1,6 @@
 package sk.magiksoft.sodalis.event.ui;
 
-import sk.magiksoft.sodalis.core.ui.controlpanel.DefaultControlPanel;
+import sk.magiksoft.sodalis.core.controlpanel.DefaultControlPanel;
 
 /**
  * @author wladimiiir

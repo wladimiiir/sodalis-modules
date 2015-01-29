@@ -34,7 +34,7 @@ import sk.magiksoft.sodalis.category.report.{CategoryWrapperDataSource, Category
 import sk.magiksoft.sodalis.core.table.ObjectTableModel
 import sk.magiksoft.sodalis.core.entity.property.{EntityPropertyTranslator, EntityPropertyTranslatorManager, EntityPropertyJRDataSource}
 import java.util.Collections
-import sk.magiksoft.sodalis.core.ui.controlpanel.ControlPanel
+import sk.magiksoft.sodalis.core.controlpanel.ControlPanel
 import sk.magiksoft.sodalis.core.filter.ui.FilterPanel
 import Swing._
 

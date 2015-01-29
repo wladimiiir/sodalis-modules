@@ -1,6 +1,6 @@
 package sk.magiksoft.sodalis.folkensemble.programme.ui;
 
-import sk.magiksoft.sodalis.core.ui.controlpanel.DefaultControlPanel;
+import sk.magiksoft.sodalis.core.controlpanel.DefaultControlPanel;
 import sk.magiksoft.sodalis.folkensemble.programme.data.ProgrammeDataManager;
 import sk.magiksoft.sodalis.folkensemble.programme.entity.Programme;
 

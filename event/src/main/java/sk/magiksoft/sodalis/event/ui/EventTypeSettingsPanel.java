@@ -12,7 +12,7 @@ import sk.magiksoft.sodalis.core.settings.SettingsManager;
 import sk.magiksoft.sodalis.core.settings.SettingsPanel;
 import sk.magiksoft.sodalis.core.table.ObjectTableModel;
 import sk.magiksoft.sodalis.core.ui.ISOptionPane;
-import sk.magiksoft.sodalis.core.ui.controlpanel.InfoPanel;
+import sk.magiksoft.sodalis.core.controlpanel.InfoPanel;
 import sk.magiksoft.sodalis.event.data.EventTypeSubject;
 import sk.magiksoft.sodalis.event.entity.EventType;
 import sk.magiksoft.swing.itemcomponent.ItemComponent;

@@ -1,6 +1,6 @@
 package sk.magiksoft.sodalis.psyche.ui
 
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.psyche.entity.PsychoTest
 import com.toedter.calendar.{JDateChooser, JTextFieldDateEditor}

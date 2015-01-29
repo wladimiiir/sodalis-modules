@@ -7,7 +7,7 @@ import sk.magiksoft.sodalis.core.factory.ColorList;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.table.ObjectTableModel;
 import sk.magiksoft.sodalis.core.ui.ISOptionPane;
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.folkensemble.member.MemberModule;
 import sk.magiksoft.sodalis.folkensemble.repertory.RepertoryModule;
 import sk.magiksoft.sodalis.folkensemble.repertory.entity.Song;

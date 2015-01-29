@@ -3,7 +3,7 @@ package sk.magiksoft.sodalis.folkensemble.programme.ui;
 import sk.magiksoft.sodalis.core.action.GoToEntityAction;
 import sk.magiksoft.sodalis.core.factory.ColorList;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.event.EventModule;
 import sk.magiksoft.sodalis.event.data.EventDataManager;
 import sk.magiksoft.sodalis.event.entity.Event;

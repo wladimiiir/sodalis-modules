@@ -7,7 +7,7 @@ import sk.magiksoft.sodalis.core.enumeration.*;
 import sk.magiksoft.sodalis.core.filter.action.Filter;
 import sk.magiksoft.sodalis.core.filter.action.FilterObjectListener;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.folkensemble.member.entity.UniversityData;
 import sk.magiksoft.sodalis.folkensemble.member.entity.property.UniversityDataPropertyTranslator;
 import sk.magiksoft.sodalis.folkensemble.member.settings.MemberSettings;

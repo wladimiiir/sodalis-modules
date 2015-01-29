@@ -4,12 +4,15 @@ import java.util.ResourceBundle
 import javax.swing.ImageIcon
 
 import org.hibernate.cfg.Configuration
+import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.module.{AbstractModule, ModuleDescriptor, VisibleModule}
 import sk.magiksoft.sodalis.icon.IconManager
+import sk.magiksoft.sodalis.person.entity.Person
 import sk.magiksoft.sodalis.service.entity.Service
 import sk.magiksoft.sodalis.service.entity.property.ServicePropertyTranslator
+import sk.magiksoft.sodalis.service.ui.{PersonServiceInfoPanel, ServiceInfoPanel}
 
 /**
  * @author wladimiiir
@@ -25,6 +28,14 @@ class ServiceModule extends AbstractModule {
     LocaleManager.registerBundleBaseName(bundleBaseName)
     EntityPropertyTranslatorManager.registerTranslator(classOf[Service], new ServicePropertyTranslator)
     IconManager.getInstance().registerIcons(getClass.getResource("icon/icon.properties"))
+
+    ControlPanelRegistry.registerInfoPanels(classOf[Service].getName, List(
+      classOf[ServiceInfoPanel]
+    ))
+    ControlPanelRegistry.registerInfoPanels(classOf[Person].getName, List(
+      classOf[PersonServiceInfoPanel]
+    ))
+
   }
 
   def getDataListener = ServiceContextManager

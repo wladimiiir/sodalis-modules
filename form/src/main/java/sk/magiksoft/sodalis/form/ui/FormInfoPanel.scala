@@ -5,7 +5,7 @@ import java.text.DecimalFormat
 import sk.magiksoft.sodalis.form.entity.{Format, Form}
 import sk.magiksoft.sodalis.form.util.DocumentUtils
 import javax.swing.{JComponent, JPanel}
-import sk.magiksoft.sodalis.core.ui.controlpanel.AbstractInfoPanel
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel
 import scala.swing._
 import scala.Some
 import sk.magiksoft.sodalis.core.locale.LocaleManager
