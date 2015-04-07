@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <joined-subclass name="sk.magiksoft.sodalis.customer.entity.CustomerData"
+                     extends="sk.magiksoft.sodalis.person.entity.PersonData" table="CustomerData">
+        <key column="id"/>
+        <property name="rating"/>
+    </joined-subclass>
+</hibernate-mapping>
