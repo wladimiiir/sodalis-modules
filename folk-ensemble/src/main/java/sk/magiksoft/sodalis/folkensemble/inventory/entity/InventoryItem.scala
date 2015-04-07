@@ -1,16 +1,14 @@
 package sk.magiksoft.sodalis.folkensemble.inventory.entity
 
-import sk.magiksoft.sodalis.category.entity.{Categorized, Category}
-import sk.magiksoft.sodalis.core.history.{Historizable, HistoryEvent}
 import java.lang.Long
-import sk.magiksoft.sodalis.core.entity.{DatabaseEntity, PostCreation}
-import java.util.{Map, HashMap, ArrayList, List}
-import sk.magiksoft.sodalis.category.CategoryDataManager
-import sk.magiksoft.sodalis.folkensemble.inventory.settings.InventorySettings
-import sk.magiksoft.sodalis.core.settings.Settings
-import sk.magiksoft.sodalis.core.logger.LoggerManager
-import scala.beans.BeanProperty
+import java.util
+
+import sk.magiksoft.sodalis.category.entity.{Categorized, Category}
+import sk.magiksoft.sodalis.core.entity.DatabaseEntity
+import sk.magiksoft.sodalis.core.history.{Historizable, HistoryEvent}
 import sk.magiksoft.sodalis.item.entity.Item
+
+import scala.beans.BeanProperty
 import scala.collection.JavaConversions._
 
 /**
@@ -19,31 +17,19 @@ import scala.collection.JavaConversions._
  */
 
 class InventoryItem extends Item with Historizable with Categorized {
-  var categories: List[Category] = new ArrayList[Category]
-  @BeanProperty var inventoryItemDatas: Map[Class[_], InventoryItemData] = new HashMap[Class[_], InventoryItemData]
+  var categories: util.List[Category] = new util.ArrayList[Category]
+  @BeanProperty var inventoryItemDatas: util.Map[Class[_], InventoryItemData] = new util.HashMap[Class[_], InventoryItemData]
 
-  @PostCreation
-  def initInventoryItemDatas(properties: Array[Any]) {
-    for (property <- properties) {
-      if (property.isInstanceOf[Class[_]] && classOf[InventoryItemData].isAssignableFrom(property.asInstanceOf[Class[_]])) {
-        try {
-          inventoryItemDatas.put(property.asInstanceOf[Class[_ <: InventoryItemData]], (property.asInstanceOf[Class[_]]).newInstance.asInstanceOf[InventoryItemData])
-        }
-        catch {
-          case ex: InstantiationException => {
-            LoggerManager.getInstance.error(classOf[InventoryItem], ex)
-          }
-          case ex: IllegalAccessException => {
-            LoggerManager.getInstance.error(classOf[InventoryItem], ex)
-          }
-        }
-      }
+  def getInventoryItemData[T <: InventoryItemData](clazz: Class[T]): T = {
+    inventoryItemDatas.containsKey(clazz) match {
+      case true =>
+        inventoryItemDatas.get(clazz).asInstanceOf[T]
+
+      case false =>
+        val data = clazz.newInstance
+        inventoryItemDatas.put(clazz, data)
+        data
     }
-    setCategories(CategoryDataManager.getInstance.getCategories(InventorySettings.getInstance.getValue(Settings.O_SELECTED_CATEGORIES).asInstanceOf[List[java.lang.Long]]))
-  }
-
-  def getInventoryItemData[T](clazz: Class[T]): T = {
-    return inventoryItemDatas.get(clazz).asInstanceOf[T]
   }
 
   override def updateFrom(entity: DatabaseEntity): Unit = {
@@ -52,28 +38,28 @@ class InventoryItem extends Item with Historizable with Categorized {
 
       entity match {
         case inventoryItem: InventoryItem => {
-          this.categories.clear
+          this.categories.clear()
           this.categories.addAll(inventoryItem.categories)
           for (inventoryItemData <- inventoryItemDatas.values) {
-            inventoryItemData.updateFrom(inventoryItem.getInventoryItemData(inventoryItemData.getClass).asInstanceOf[InventoryItemData])
+            inventoryItemData.updateFrom(inventoryItem.getInventoryItemData(inventoryItemData.getClass))
           }
         }
       }
     }
   }
 
-  def getCategories: List[Category] = {
-    return categories
+  def getCategories: util.List[Category] = {
+    categories
   }
 
 
-  def setCategories(categories: List[Category]): Unit = {
+  def setCategories(categories: util.List[Category]): Unit = {
     this.categories = categories
   }
 
 
   def addHistoryEvent(event: HistoryEvent): Unit = {
-    val historyEvents: List[HistoryEvent] = getInventoryItemData(classOf[InventoryHistoryData]).getHistoryEvents
+    val historyEvents: util.List[HistoryEvent] = getInventoryItemData(classOf[InventoryHistoryData]).getHistoryEvents
     historyEvents.add(event)
   }
 

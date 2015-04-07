@@ -4,11 +4,9 @@ import sk.magiksoft.sodalis.category.entity.Categorized;
 import sk.magiksoft.sodalis.category.entity.Category;
 import sk.magiksoft.sodalis.core.entity.AbstractDatabaseEntity;
 import sk.magiksoft.sodalis.core.entity.DatabaseEntity;
-import sk.magiksoft.sodalis.core.entity.PostCreation;
 import sk.magiksoft.sodalis.core.history.Historizable;
 import sk.magiksoft.sodalis.core.history.HistoryEvent;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
-import sk.magiksoft.sodalis.core.logger.LoggerManager;
 import sk.magiksoft.sodalis.core.utils.CalendarUtils;
 
 import java.awt.*;
@@ -109,21 +107,6 @@ public class Event extends AbstractDatabaseEntity implements Categorized, Histor
 
     public void setRemovedFromRepeating(List<Calendar> removedFromRepeating) {
         this.removedFromRepeating = removedFromRepeating;
-    }
-
-    @PostCreation
-    public void initEventDatas(Object... switches) {
-        for (Object s : switches) {
-            if (s instanceof Class && EventData.class.isAssignableFrom((Class) s)) {
-                try {
-                    eventDatas.put((Class<? extends EventData>) s, (EventData) ((Class) s).newInstance());
-                } catch (InstantiationException ex) {
-                    LoggerManager.getInstance().error(Event.class, ex);
-                } catch (IllegalAccessException ex) {
-                    LoggerManager.getInstance().error(Event.class, ex);
-                }
-            }
-        }
     }
 
     public boolean isRepeating() {
@@ -227,7 +210,20 @@ public class Event extends AbstractDatabaseEntity implements Categorized, Histor
     }
 
     public <T extends EventData> T getEventData(Class<T> clazz) {
-        return (T) eventDatas.get(clazz);
+        final EventData data;
+
+        if (eventDatas.containsKey(clazz)) {
+            data = eventDatas.get(clazz);
+        } else {
+            try {
+                data = clazz.newInstance();
+                eventDatas.put(clazz, data);
+            } catch (InstantiationException | IllegalAccessException e) {
+                throw new RuntimeException("Cannot create new instance for data class: " + clazz.getName(), e);
+            }
+        }
+
+        return clazz.cast(data);
     }
 
     public boolean acceptDay(Calendar day) {

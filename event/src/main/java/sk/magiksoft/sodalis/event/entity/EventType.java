@@ -3,7 +3,6 @@ package sk.magiksoft.sodalis.event.entity;
 import sk.magiksoft.sodalis.category.entity.Category;
 import sk.magiksoft.sodalis.core.entity.AbstractDatabaseEntity;
 import sk.magiksoft.sodalis.core.entity.DatabaseEntity;
-import sk.magiksoft.sodalis.core.factory.EntityFactory;
 import sk.magiksoft.sodalis.event.data.EventDataManager;
 import sk.magiksoft.sodalis.event.settings.EventSettings;
 
@@ -50,7 +49,7 @@ public class EventType extends AbstractDatabaseEntity {
     }
 
     public Event createEvent() {
-        Event event = EntityFactory.getInstance().createEntity(Event.class);
+        final Event event = new Event();
 
         event.setEventType(this);
         event.setCategories(getCategories(event));

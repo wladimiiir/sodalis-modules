@@ -1,7 +1,6 @@
 package sk.magiksoft.sodalis.event.ui;
 
 import sk.magiksoft.sodalis.core.factory.ColorList;
-import sk.magiksoft.sodalis.core.factory.EntityFactory;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.logger.LoggerManager;
 import sk.magiksoft.sodalis.event.data.EventDataManager;
@@ -246,7 +245,7 @@ public class TimePanel extends JPanel implements Pageable, Printable {
                 date.set(Calendar.DATE, onPoint.get(Calendar.DATE));
                 date.set(Calendar.MONTH, onPoint.get(Calendar.MONTH));
                 date.set(Calendar.YEAR, onPoint.get(Calendar.YEAR));
-                final Event event = EntityFactory.getInstance().createEntity(Event.class);
+                final Event event = new Event();
                 final long diff = eventPanelEvent.getEndTime().getTimeInMillis() - eventPanelEvent.getStartTime().getTimeInMillis();
                 event.updateFrom(eventPanelEvent);
                 event.clearIDs();

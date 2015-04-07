@@ -1,20 +1,18 @@
 package sk.magiksoft.sodalis.event
 
 import java.util.ResourceBundle
+import javax.swing.ImageIcon
 
-import entity.property.EventPropertyTranslator
-import entity.{Event, EventEntityData, EventHistoryData}
 import org.hibernate.cfg.Configuration
 import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
+import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
 import sk.magiksoft.sodalis.core.history.HistoryInfoPanel
 import sk.magiksoft.sodalis.core.locale.LocaleManager
-import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
-import javax.swing.ImageIcon
-import sk.magiksoft.sodalis.core.factory.EntityFactory
-import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
+import sk.magiksoft.sodalis.core.module.{AbstractModule, ModuleDescriptor, VisibleModule}
+import sk.magiksoft.sodalis.event.entity.Event
+import sk.magiksoft.sodalis.event.entity.property.EventPropertyTranslator
 import sk.magiksoft.sodalis.event.ui.{CategorizedEventInfoPanel, EventInfoPanel}
 import sk.magiksoft.sodalis.icon.IconManager
-import sk.magiksoft.sodalis.person.entity.Person
 
 /**
  * @author wladimiiir
@@ -30,8 +28,6 @@ class EventModule extends AbstractModule {
 
   override def startUp(): Unit = {
     LocaleManager.registerBundleBaseName(bundleBaseName)
-    EntityFactory.getInstance.registerEntityProperties(classOf[Event], classOf[EventHistoryData])
-    EntityFactory.getInstance.registerEntityProperties(classOf[Person], classOf[EventEntityData])
     EntityPropertyTranslatorManager.registerTranslator(classOf[Event], new EventPropertyTranslator)
     IconManager.getInstance().registerIcons(getClass.getResource("/sk/magiksoft/sodalis/event/icon/icons.properties"))
 

@@ -4,8 +4,6 @@ import sk.magiksoft.sodalis.category.CategoryDataManager;
 import sk.magiksoft.sodalis.category.entity.Category;
 import sk.magiksoft.sodalis.core.action.ActionMessage;
 import sk.magiksoft.sodalis.core.action.MessageAction;
-import sk.magiksoft.sodalis.core.factory.EntityFactory;
-import sk.magiksoft.sodalis.icon.IconManager;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.ui.OkCancelDialog;
 import sk.magiksoft.sodalis.core.utils.UIUtils;
@@ -13,6 +11,7 @@ import sk.magiksoft.sodalis.folkensemble.repertory.data.RepertoryDataManager;
 import sk.magiksoft.sodalis.folkensemble.repertory.entity.Song;
 import sk.magiksoft.sodalis.folkensemble.repertory.settings.RepertorySettings;
 import sk.magiksoft.sodalis.folkensemble.repertory.ui.SongInfoPanel;
+import sk.magiksoft.sodalis.icon.IconManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -42,7 +41,7 @@ public class AddSongAction extends MessageAction {
             initDialog();
         }
 
-        song = EntityFactory.getInstance().createEntity(Song.class);
+        song = new Song();
         songInfoPanel.setupPanel(song);
         songInfoPanel.initData();
 
@@ -63,8 +62,8 @@ public class AddSongAction extends MessageAction {
         dialog.setSize(650, 350);
     }
 
-    private List<Category> getCategories(Song song) {
-        final List<Long> ids = (List<Long>) RepertorySettings.getInstance().getValue(RepertorySettings.O_SELECTED_CATEGORIES);
+    private List<Category> getCategories() {
+        final List<Long> ids = RepertorySettings.getInstance().getValue(RepertorySettings.O_SELECTED_CATEGORIES);
 
         return CategoryDataManager.getInstance().getCategories(ids);
     }
@@ -75,7 +74,7 @@ public class AddSongAction extends MessageAction {
         public void actionPerformed(ActionEvent e) {
 
             songInfoPanel.setupObject(song);
-            song.setCategories(getCategories(song));
+            song.setCategories(getCategories());
             RepertoryDataManager.getInstance().addDatabaseEntity(song);
             dialog.setVisible(false);
         }

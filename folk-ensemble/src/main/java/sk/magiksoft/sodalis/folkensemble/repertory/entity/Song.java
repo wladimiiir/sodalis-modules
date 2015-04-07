@@ -4,10 +4,8 @@ import sk.magiksoft.sodalis.category.entity.Categorized;
 import sk.magiksoft.sodalis.category.entity.Category;
 import sk.magiksoft.sodalis.core.entity.AbstractDatabaseEntity;
 import sk.magiksoft.sodalis.core.entity.DatabaseEntity;
-import sk.magiksoft.sodalis.core.entity.PostCreation;
 import sk.magiksoft.sodalis.core.history.Historizable;
 import sk.magiksoft.sodalis.core.history.HistoryEvent;
-import sk.magiksoft.sodalis.core.logger.LoggerManager;
 import sk.magiksoft.sodalis.person.entity.PersonWrapper;
 
 import java.text.DecimalFormat;
@@ -35,21 +33,6 @@ public class Song extends AbstractDatabaseEntity implements Categorized, Histori
     private List<Category> categories = new ArrayList<Category>();
     protected Map<Class<? extends SongData>, SongData> songDatas = new HashMap<Class<? extends SongData>, SongData>();
 
-    @PostCreation
-    public void initSongDatas(Object... switches) {
-        for (Object s : switches) {
-            if (s instanceof Class && SongData.class.isAssignableFrom((Class) s)) {
-                try {
-                    songDatas.put((Class<? extends SongData>) s, (SongData) ((Class) s).newInstance());
-                } catch (InstantiationException ex) {
-                    LoggerManager.getInstance().error(Song.class, ex);
-                } catch (IllegalAccessException ex) {
-                    LoggerManager.getInstance().error(Song.class, ex);
-                }
-            }
-        }
-    }
-
     public Map<Class<? extends SongData>, SongData> getSongDatas() {
         return songDatas;
     }
@@ -59,11 +42,20 @@ public class Song extends AbstractDatabaseEntity implements Categorized, Histori
     }
 
     public <T extends SongData> T getSongData(Class<T> clazz) {
-        return (T) songDatas.get(clazz);
-    }
+        final SongData data;
 
-    public void putSongData(SongData data) {
-        songDatas.put(data.getClass(), data);
+        if (songDatas.containsKey(clazz)) {
+            data = songDatas.get(clazz);
+        } else {
+            try {
+                data = clazz.newInstance();
+                songDatas.put(clazz, data);
+            } catch (InstantiationException | IllegalAccessException e) {
+                throw new RuntimeException("Cannot create new instance for data class: " + clazz.getName(), e);
+            }
+        }
+
+        return clazz.cast(data);
     }
 
     @Override

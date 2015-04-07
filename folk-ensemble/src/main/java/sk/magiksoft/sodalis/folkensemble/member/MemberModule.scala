@@ -1,39 +1,24 @@
 package sk.magiksoft.sodalis.folkensemble.member
 
-import action.{RemoveMemberAction, AddMemberAction}
-import data.EnsembleGroupDynamicCategory
-import entity.property.MemberPropertyTranslator
-import entity.{UniversityData, EnsembleData, MemberData}
+import javax.swing.ImageIcon
+
 import org.hibernate.cfg.Configuration
-import org.hibernate.tool.hbm2ddl.{Target, SchemaExport}
+import sk.magiksoft.sodalis.category.CategoryManager
 import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
 import sk.magiksoft.sodalis.core.controlpanel.impl.NoteInfoPanel
-import sk.magiksoft.sodalis.core.data.DBManager
-import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
-import javax.swing.ImageIcon
-import sk.magiksoft.sodalis.core.locale.LocaleManager
-import sk.magiksoft.sodalis.core.factory.EntityFactory
-import sk.magiksoft.sodalis.event.ui.EventTableInfoPanel
-import sk.magiksoft.sodalis.folkensemble.event.entity.EnsembleEventData
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
 import sk.magiksoft.sodalis.core.imex.ImExManager
+import sk.magiksoft.sodalis.core.locale.LocaleManager
+import sk.magiksoft.sodalis.core.module.{AbstractModule, ModuleDescriptor, VisibleModule}
+import sk.magiksoft.sodalis.event.ui.EventTableInfoPanel
+import sk.magiksoft.sodalis.folkensemble.member.data.EnsembleGroupDynamicCategory
+import sk.magiksoft.sodalis.folkensemble.member.entity.property.MemberPropertyTranslator
 import sk.magiksoft.sodalis.folkensemble.member.ui._
 import sk.magiksoft.sodalis.icon.IconManager
-import sk.magiksoft.sodalis.person.entity.{Person, PersonWrapper, PersonHistoryData, PrivatePersonData}
-import sk.magiksoft.sodalis.person.imex.{PersonWrapperImportResolver, PersonImportResolver}
-import collection.JavaConversions
-import collection.mutable.ArrayBuffer
-import sk.magiksoft.sodalis.category.CategoryManager
-import sk.magiksoft.sodalis.person.data.SexDynamicCategory
-import sk.magiksoft.sodalis.core.SodalisApplication
-import sk.magiksoft.sodalis.folkensemble.repertory.RepertoryModule
-import sk.magiksoft.sodalis.folkensemble.repertory.entity.Song
-import collection.JavaConversions._
-import sk.magiksoft.sodalis.folkensemble.programme.ProgrammeModule
-import sk.magiksoft.sodalis.folkensemble.programme.entity.Programme
-import sk.magiksoft.sodalis.category.entity.{Category, Categorized, EntityDynamicCategory, DynamicCategory}
-import sk.magiksoft.sodalis.event.entity.Event
 import sk.magiksoft.sodalis.person.PersonModule
+import sk.magiksoft.sodalis.person.data.SexDynamicCategory
+import sk.magiksoft.sodalis.person.entity.{Person, PersonWrapper}
+import sk.magiksoft.sodalis.person.imex.{PersonImportResolver, PersonWrapperImportResolver}
 
 /**
  * @author wladimiiir
@@ -46,44 +31,11 @@ class MemberModule extends AbstractModule with PersonModule {
     new ImageIcon(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/icon/folkMember2.png")),
     LocaleManager.getString("members")
   )
-  private lazy val dynamicCategories = createDynamicCategories
-
-  private def createDynamicCategories = {
-    val rootCategory = CategoryManager.getInstance.getRootCategory(classOf[MemberModule], false)
-    val categories = new ArrayBuffer[DynamicCategory]
-
-    categories += new SexDynamicCategory(rootCategory)
-    categories += new EnsembleGroupDynamicCategory(rootCategory)
-    if (SodalisApplication.get.getModuleManager.isModulePresent(classOf[RepertoryModule])) {
-      categories += new EntityDynamicCategory[Song, Person](LocaleManager.getString("songInterpretation"), "select s from Song s where size(s.interpreters)>0") {
-        id = -1l
-        parentCategory = rootCategory
-
-        def acceptCategorized(entity: Song, categorized: Person) =
-          entity.getInterpreters.exists {
-            pw => (pw.getPerson ne null) && (pw.getPerson.id == categorized.getId)
-          }
-      }
-    }
-    if (SodalisApplication.get.getModuleManager.isModulePresent(classOf[ProgrammeModule])) {
-      categories += new EntityDynamicCategory[Programme, Person](LocaleManager.getString("programme"), "select p from Programme p left join p.programmeSongs as ps where size(p.programmeSongs)>0 and size(ps.interpreters)>0") {
-        id = -2l
-        parentCategory = rootCategory
-
-        def acceptCategorized(entity: Programme, categorized: Person) =
-          entity.getInterpreters.exists {
-            pw => (pw.getPerson ne null) && (pw.getPerson.id == categorized.getId)
-          }
-      }
-    }
-
-    categories
-  }
 
   override def startUp(): Unit = {
     LocaleManager.registerBundleBaseName("sk.magiksoft.sodalis.folkensemble.locale.member")
 
-    EntityFactory.getInstance.registerEntityProperties(classOf[Person], classOf[PrivatePersonData], classOf[PersonHistoryData], classOf[MemberData], classOf[UniversityData], classOf[EnsembleData])
+    initDynamicCategories()
     EntityPropertyTranslatorManager.registerTranslator(classOf[Person], new MemberPropertyTranslator)
     ImExManager.registerImportProcessor(classOf[Person], new PersonImportResolver)
     ImExManager.registerImportProcessor(classOf[PersonWrapper], new PersonWrapperImportResolver)
@@ -102,18 +54,18 @@ class MemberModule extends AbstractModule with PersonModule {
     ))
   }
 
+  private def initDynamicCategories(): Unit = {
+    val rootCategory = CategoryManager.getInstance.getRootCategory(classOf[MemberModule], false)
+
+    registerDynamicCategory(new SexDynamicCategory(rootCategory))
+    registerDynamicCategory(new EnsembleGroupDynamicCategory(rootCategory))
+  }
+
   def getDataListener = MemberContextManager
 
   def getContextManager = MemberContextManager
 
   def getModuleDescriptor = moduleDescriptor
-
-  override def getDynamicCategories = {
-    dynamicCategories.foreach {
-      _.refresh()
-    }
-    super.getDynamicCategories ++ dynamicCategories
-  }
 
   override def initConfiguration(configuration: Configuration): Unit = {
     configuration.addURL(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/member/data/mapping/ensemble.hbm.xml"))

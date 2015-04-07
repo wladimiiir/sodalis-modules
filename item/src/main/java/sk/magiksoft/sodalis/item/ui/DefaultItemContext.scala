@@ -1,42 +1,41 @@
 package sk.magiksoft.sodalis.item.ui
 
-import sk.magiksoft.sodalis.icon.IconManager
-
-import swing.event.ButtonClicked
-import sk.magiksoft.sodalis.core.entity.{Entity, DatabaseEntity}
-import sk.magiksoft.sodalis.core.data.DefaultDataManager
-import sk.magiksoft.sodalis.core.utils.UIUtils
-import sk.magiksoft.swing.HideableSplitPane
-import sk.magiksoft.sodalis.core.utils.Conversions._
-import collection.JavaConversions._
-import sk.magiksoft.sodalis.item.event.{ItemTypeSelectionChanged, ItemSelectionChanged}
-import sk.magiksoft.sodalis.core.locale.LocaleManager
-import collection.mutable.ListBuffer
-import sk.magiksoft.sodalis.core.ui.{ISOptionPane, AbstractContext, OkCancelDialog}
-import sk.magiksoft.sodalis.core.SodalisApplication
-import sk.magiksoft.sodalis.item.entity.{ItemPropertyValue, Item, ItemType}
-import sk.magiksoft.sodalis.core.factory.EntityFactory
-import sk.magiksoft.sodalis.item.factory.ItemPropertiesFactory
-import sk.magiksoft.sodalis.item.action.{ItemTypeImportAction, ItemTypeExportAction, ItemImportAction, ItemExportAction}
-import java.awt.{GridBagConstraints, GridBagLayout, BorderLayout}
-import swing.{BorderPanel, Swing, Button}
-import sk.magiksoft.sodalis.core.module.Module
-import sk.magiksoft.swing.table.SelectionListener
-import sk.magiksoft.sodalis.category.ui.CategoryTreeComponent
-import javax.swing.{AbstractButton, JScrollPane, JOptionPane, JSplitPane}
-import collection.immutable.List
-import sk.magiksoft.sodalis.category.CategoryManager
-import sk.magiksoft.sodalis.item.entity.property.ItemTypeEntityPropertyTranslator
-import sk.magiksoft.sodalis.item.ItemSettings
-import sk.magiksoft.sodalis.core.settings.Settings
-import sk.magiksoft.sodalis.core.printing.{TableColumnWrapper, TablePrintSettings, TablePrintDialog}
-import sk.magiksoft.sodalis.category.report.{CategoryWrapperDataSource, CategoryPathWrapper}
-import sk.magiksoft.sodalis.core.table.ObjectTableModel
-import sk.magiksoft.sodalis.core.entity.property.{EntityPropertyTranslator, EntityPropertyTranslatorManager, EntityPropertyJRDataSource}
+import java.awt.{BorderLayout, GridBagConstraints, GridBagLayout}
 import java.util.Collections
+import javax.swing.{JOptionPane, JScrollPane, JSplitPane}
+
+import sk.magiksoft.sodalis.category.CategoryManager
+import sk.magiksoft.sodalis.category.report.{CategoryPathWrapper, CategoryWrapperDataSource}
+import sk.magiksoft.sodalis.category.ui.CategoryTreeComponent
+import sk.magiksoft.sodalis.core.SodalisApplication
 import sk.magiksoft.sodalis.core.controlpanel.ControlPanel
+import sk.magiksoft.sodalis.core.data.DefaultDataManager
+import sk.magiksoft.sodalis.core.entity.property.{EntityPropertyJRDataSource, EntityPropertyTranslator, EntityPropertyTranslatorManager}
+import sk.magiksoft.sodalis.core.entity.{DatabaseEntity, Entity}
 import sk.magiksoft.sodalis.core.filter.ui.FilterPanel
-import Swing._
+import sk.magiksoft.sodalis.core.locale.LocaleManager
+import sk.magiksoft.sodalis.core.printing.{TableColumnWrapper, TablePrintDialog, TablePrintSettings}
+import sk.magiksoft.sodalis.core.settings.Settings
+import sk.magiksoft.sodalis.core.table.ObjectTableModel
+import sk.magiksoft.sodalis.core.ui.{AbstractContext, ISOptionPane, OkCancelDialog}
+import sk.magiksoft.sodalis.core.utils.Conversions._
+import sk.magiksoft.sodalis.core.utils.UIUtils
+import sk.magiksoft.sodalis.icon.IconManager
+import sk.magiksoft.sodalis.item.ItemSettings
+import sk.magiksoft.sodalis.item.action.{ItemExportAction, ItemImportAction, ItemTypeExportAction, ItemTypeImportAction}
+import sk.magiksoft.sodalis.item.entity.property.ItemTypeEntityPropertyTranslator
+import sk.magiksoft.sodalis.item.entity.{Item, ItemPropertyValue, ItemType}
+import sk.magiksoft.sodalis.item.event.{ItemSelectionChanged, ItemTypeSelectionChanged}
+import sk.magiksoft.sodalis.item.factory.ItemPropertiesFactory
+import sk.magiksoft.swing.HideableSplitPane
+import sk.magiksoft.swing.table.SelectionListener
+
+import scala.collection.JavaConversions._
+import scala.collection.immutable.List
+import scala.collection.mutable.ListBuffer
+import scala.swing.Swing._
+import scala.swing.event.ButtonClicked
+import scala.swing.{BorderPanel, Button, Swing}
 
 /**
  * @author wladimiiir
@@ -440,7 +439,7 @@ class DefaultItemContext(itemClass: Class[_ <: Item], itemTypeKey: String, contr
     setLocationRelativeTo(null)
 
     getOkButton.addActionListener(Swing.ActionListener(e => {
-      val item = EntityFactory.getInstance().createEntity(itemClass)
+      val item = itemClass.newInstance()
       item.itemType = itemType
       item.values = new ListBuffer[ItemPropertyValue] ++ presenterPanel.getValues
       DefaultDataManager.getInstance.addDatabaseEntity(item)

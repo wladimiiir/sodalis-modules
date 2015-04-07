@@ -5,10 +5,8 @@ import sk.magiksoft.sodalis.category.entity.Category;
 import sk.magiksoft.sodalis.core.entity.AbstractDatabaseEntity;
 import sk.magiksoft.sodalis.core.entity.DatabaseEntity;
 import sk.magiksoft.sodalis.core.entity.DatabaseEntityContainer;
-import sk.magiksoft.sodalis.core.entity.PostCreation;
 import sk.magiksoft.sodalis.core.history.Historizable;
 import sk.magiksoft.sodalis.core.history.HistoryEvent;
-import sk.magiksoft.sodalis.core.logger.LoggerManager;
 import sk.magiksoft.sodalis.folkensemble.repertory.entity.Song;
 import sk.magiksoft.sodalis.person.entity.PersonWrapper;
 
@@ -136,24 +134,21 @@ public class Programme extends AbstractDatabaseEntity implements Categorized, Hi
         }
     }
 
-    @PostCreation
-    public void initProgrammeDatas(Object... switches) {
-        for (Object s : switches) {
-            if (s instanceof Class && ProgrammeData.class.isAssignableFrom((Class) s)) {
-                try {
-                    programmeDatas.put((Class<? extends ProgrammeData>) s, (ProgrammeData) ((Class) s).
-                            newInstance());
-                } catch (InstantiationException ex) {
-                    LoggerManager.getInstance().error(Song.class, ex);
-                } catch (IllegalAccessException ex) {
-                    LoggerManager.getInstance().error(Song.class, ex);
-                }
+    public <T extends ProgrammeData> T getProgrammeData(Class<T> clazz) {
+        final ProgrammeData data;
+
+        if (programmeDatas.containsKey(clazz)) {
+            data = programmeDatas.get(clazz);
+        } else {
+            try {
+                data = clazz.newInstance();
+                programmeDatas.put(clazz, data);
+            } catch (InstantiationException | IllegalAccessException e) {
+                throw new RuntimeException("Cannot create new instance for data class: " + clazz.getName(), e);
             }
         }
-    }
 
-    public <T extends ProgrammeData> T getProgrammeData(Class<T> clazz) {
-        return (T) programmeDatas.get(clazz);
+        return clazz.cast(data);
     }
 
     public void putProgrammeData(ProgrammeData data) {

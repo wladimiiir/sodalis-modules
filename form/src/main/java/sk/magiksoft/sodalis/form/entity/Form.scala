@@ -1,16 +1,15 @@
 package sk.magiksoft.sodalis.form.entity
 
-import sk.magiksoft.sodalis.category.entity.{Category, Categorized}
-import java.util.List
+import java.util
+
+import sk.magiksoft.sodalis.category.entity.{Categorized, Category}
 import sk.magiksoft.sodalis.core.entity._
-import sk.magiksoft.sodalis.category.CategoryDataManager
-import sk.magiksoft.sodalis.form.settings.FormSettings
 import sk.magiksoft.sodalis.form.ui.FormDrawing
 import sk.magiksoft.sodalis.form.util.DocumentUtils
+
 import scala.beans.BeanProperty
-import scala.collection.mutable.ListBuffer
 import scala.collection.JavaConversions._
-import sk.magiksoft.sodalis.core.settings.Settings
+import scala.collection.mutable.ListBuffer
 
 /**
  * @author wladimiiir
@@ -30,16 +29,8 @@ class Form(pageFormat: Format.Format, widthMM: Double, heightMM: Double) extends
 
   def this() = this(Format.A4, Format.getWidthMM(Format.A4), Format.getHeightMM(Format.A4))
 
-  @PostCreation def postCreation = {
-    setCategories(CategoryDataManager.getInstance.getCategories(FormSettings.getValue(Settings.O_SELECTED_CATEGORIES).asInstanceOf[List[java.lang.Long]]))
-  }
-
-  def setCategories(categories: List[Category]) = {
+  def setCategories(categories: util.List[Category]) = {
     this.categories = new ListBuffer[Category] ++ categories
-  }
-
-  def addTranslator(translation: (String => String)) = {
-
   }
 
   def getCategories = categories
@@ -60,8 +51,8 @@ class Form(pageFormat: Format.Format, widthMM: Double, heightMM: Double) extends
     }
   }
 
-  def clearPages = for (drawing <- pages) {
-    drawing.clear
+  def clearPages() = for (drawing <- pages) {
+    drawing.clear()
   }
 
   override def toString = name

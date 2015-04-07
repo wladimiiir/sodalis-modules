@@ -2,22 +2,23 @@ package sk.magiksoft.sodalis.event.action
 
 import java.awt.event.ActionEvent
 import java.util
-import sk.magiksoft.sodalis.core.locale.LocaleManager
-import sk.magiksoft.sodalis.core.controlpanel.InfoPanel
-import sk.magiksoft.sodalis.core.utils.Conversions._
-import sk.magiksoft.sodalis.event.ui.EventControlPanel
-import sk.magiksoft.sodalis.core.factory.EntityFactory
-import sk.magiksoft.sodalis.event.settings.EventSettings
-import sk.magiksoft.sodalis.event.data.EventDataManager
-import sk.magiksoft.sodalis.event.entity.{EventType, Event}
-import sk.magiksoft.sodalis.icon.IconManager
-import collection.JavaConversions._
-import java.util.{List, Calendar}
-import sk.magiksoft.sodalis.core.action.{ActionMessage, MessageAction}
-import sk.magiksoft.sodalis.core.ui.wizard.{WizardFinished, Page, Wizard}
-import sk.magiksoft.sodalis.core.SodalisApplication
-import sk.magiksoft.sodalis.core.settings.Settings
+import java.util.Calendar
+
 import sk.magiksoft.sodalis.category.CategoryDataManager
+import sk.magiksoft.sodalis.core.SodalisApplication
+import sk.magiksoft.sodalis.core.action.{ActionMessage, MessageAction}
+import sk.magiksoft.sodalis.core.controlpanel.InfoPanel
+import sk.magiksoft.sodalis.core.locale.LocaleManager
+import sk.magiksoft.sodalis.core.settings.Settings
+import sk.magiksoft.sodalis.core.ui.wizard.{Page, Wizard, WizardFinished}
+import sk.magiksoft.sodalis.core.utils.Conversions._
+import sk.magiksoft.sodalis.event.data.EventDataManager
+import sk.magiksoft.sodalis.event.entity.{Event, EventType}
+import sk.magiksoft.sodalis.event.settings.EventSettings
+import sk.magiksoft.sodalis.event.ui.EventControlPanel
+import sk.magiksoft.sodalis.icon.IconManager
+
+import scala.collection.JavaConversions._
 
 /**
  * @author wladimiiir
@@ -76,7 +77,7 @@ class AddEventAction extends MessageAction(null, IconManager.getInstance.getIcon
   private def createEvent = {
     val ids = EventSettings.getInstance.getValue(Settings.O_SELECTED_CATEGORIES).asInstanceOf[util.List[java.lang.Long]]
     val categories = CategoryDataManager.getInstance.getCategories(ids)
-    val event = EntityFactory.getInstance.createEntity(classOf[Event])
+    val event = new Event()
     event.setCategories(categories)
     pages(0).infoPanel.setupObject(event)
     event

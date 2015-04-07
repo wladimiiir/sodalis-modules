@@ -4,8 +4,6 @@ import sk.magiksoft.sodalis.category.CategoryDataManager;
 import sk.magiksoft.sodalis.category.entity.Category;
 import sk.magiksoft.sodalis.core.action.ActionMessage;
 import sk.magiksoft.sodalis.core.action.MessageAction;
-import sk.magiksoft.sodalis.core.factory.EntityFactory;
-import sk.magiksoft.sodalis.icon.IconManager;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.ui.OkCancelDialog;
 import sk.magiksoft.sodalis.core.utils.UIUtils;
@@ -13,6 +11,7 @@ import sk.magiksoft.sodalis.folkensemble.programme.data.ProgrammeDataManager;
 import sk.magiksoft.sodalis.folkensemble.programme.entity.Programme;
 import sk.magiksoft.sodalis.folkensemble.programme.settings.ProgrammeSettings;
 import sk.magiksoft.sodalis.folkensemble.programme.ui.ProgrammeInfoPanel;
+import sk.magiksoft.sodalis.icon.IconManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -42,7 +41,7 @@ public class AddProgrammeAction extends MessageAction {
             initDialog();
         }
 
-        programme = EntityFactory.getInstance().createEntity(Programme.class);
+        programme = new Programme();
         programmeInfoPanel.setupPanel(programme);
         programmeInfoPanel.initData();
 
@@ -63,21 +62,17 @@ public class AddProgrammeAction extends MessageAction {
         dialog.setSize(500, 350);
     }
 
-    private List<Category> getCategories(Programme programme) {
-        List<Long> ids = (List<Long>) ProgrammeSettings.getInstance().getValue(
-                ProgrammeSettings.O_SELECTED_CATEGORIES);
-        List<Category> categories = CategoryDataManager.getInstance().getCategories(ids);
-
-        return categories;
+    private List<Category> getCategories() {
+        final List<Long> ids = ProgrammeSettings.getInstance().getValue(ProgrammeSettings.O_SELECTED_CATEGORIES);
+        return CategoryDataManager.getInstance().getCategories(ids);
     }
 
     private class SaveAction extends AbstractAction {
-
         @Override
         public void actionPerformed(ActionEvent e) {
 
             programmeInfoPanel.setupObject(programme);
-            programme.setCategories(getCategories(programme));
+            programme.setCategories(getCategories());
             ProgrammeDataManager.getInstance().addDatabaseEntity(programme);
             dialog.setVisible(false);
         }

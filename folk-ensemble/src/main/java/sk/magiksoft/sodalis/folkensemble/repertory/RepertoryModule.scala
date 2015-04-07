@@ -1,33 +1,30 @@
 package sk.magiksoft.sodalis.folkensemble.repertory
 
 import java.util.ResourceBundle
-
-import entity.property.SongPropertyTranslator
-import entity.{SongHistoryData, Song}
-import imex.SongImportResolver
-import org.hibernate.cfg.Configuration
-import org.hibernate.tool.hbm2ddl.{Target, SchemaExport}
-import sk.magiksoft.sodalis.core.SodalisApplication
-import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
-import sk.magiksoft.sodalis.core.data.DBManager
-import sk.magiksoft.sodalis.core.history.HistoryInfoPanel
-import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
 import javax.swing.ImageIcon
-import sk.magiksoft.sodalis.core.locale.LocaleManager
+
+import org.hibernate.cfg.Configuration
 import sk.magiksoft.sodalis.category.CategoryManager
-import sk.magiksoft.sodalis.core.factory.EntityFactory
+import sk.magiksoft.sodalis.category.entity.{Categorized, EntityDynamicCategory}
+import sk.magiksoft.sodalis.core.SodalisManager
+import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
-import sk.magiksoft.sodalis.core.imex.ImExManager
-import sk.magiksoft.sodalis.folkensemble.repertory.ui.{CategorizedRepertoryInfoPanel, InterpretationInfoPanel, SongInfoPanel}
-import sk.magiksoft.sodalis.icon.IconManager
-import sk.magiksoft.sodalis.person.data.PersonWrapperDynamicCategory
-import sk.magiksoft.sodalis.person.entity.PersonWrapper
-import collection.JavaConversions._
-import sk.magiksoft.sodalis.folkensemble.member.data.EnsembleGroupDynamicCategory
-import sk.magiksoft.sodalis.category.entity.{EntityDynamicCategory, Categorized}
-import sk.magiksoft.sodalis.folkensemble.programme.entity.Programme
 import sk.magiksoft.sodalis.core.enumeration.{EnumerationDynamicCategory, Enumerations}
-import java.lang.String
+import sk.magiksoft.sodalis.core.history.HistoryInfoPanel
+import sk.magiksoft.sodalis.core.imex.ImExManager
+import sk.magiksoft.sodalis.core.locale.LocaleManager
+import sk.magiksoft.sodalis.core.module.{AbstractModule, ModuleDescriptor, VisibleModule}
+import sk.magiksoft.sodalis.folkensemble.member.MemberModule
+import sk.magiksoft.sodalis.folkensemble.member.data.EnsembleGroupDynamicCategory
+import sk.magiksoft.sodalis.folkensemble.programme.entity.Programme
+import sk.magiksoft.sodalis.folkensemble.repertory.entity.Song
+import sk.magiksoft.sodalis.folkensemble.repertory.entity.property.SongPropertyTranslator
+import sk.magiksoft.sodalis.folkensemble.repertory.imex.SongImportResolver
+import sk.magiksoft.sodalis.folkensemble.repertory.ui.{CategorizedRepertoryInfoPanel, InterpretationInfoPanel, SongInfoPanel}
+import sk.magiksoft.sodalis.person.data.PersonWrapperDynamicCategory
+import sk.magiksoft.sodalis.person.entity.{Person, PersonWrapper}
+
+import scala.collection.JavaConversions._
 
 /**
  * @author wladimiiir
@@ -41,83 +38,8 @@ class RepertoryModule extends AbstractModule {
     ResourceBundle.getBundle(bundleBaseName).getString("repertory.moduleName")
   )
 
-  private lazy val dynamicCategories = createDynamicCategories
-
-  private def createDynamicCategories = {
-    val moduleCategory = CategoryManager.getInstance().getRootCategory(classOf[RepertoryModule], false)
-    List(
-      new PersonWrapperDynamicCategory[Song](LocaleManager.getString("musicComposing"), "select s.composers from Song s") {
-        setParentCategory(moduleCategory)
-        setId(-10l)
-
-        protected def acceptCategorized(entity: PersonWrapper, categorized: Song) = categorized.getComposers.exists {
-          p => ((p.getPerson ne null) && (entity.getPerson ne null) && (p.getPerson.getId == entity.getPerson.getId)) ||
-            (p.getPersonName == entity.getPersonName)
-        }
-      },
-      new PersonWrapperDynamicCategory[Song](LocaleManager.getString("pedagogists"), "select s.pedagogists from Song s") {
-        setParentCategory(moduleCategory)
-        setId(-20l)
-
-        protected def acceptCategorized(entity: PersonWrapper, categorized: Song) = categorized.getPedagogists.exists {
-          p => ((p.getPerson ne null) && (entity.getPerson ne null) && (p.getPerson.getId == entity.getPerson.getId)) ||
-            (p.getPersonName == entity.getPersonName)
-        }
-      },
-      new PersonWrapperDynamicCategory[Song](LocaleManager.getString("choreography"), "select s.choreographers from Song s") {
-        setParentCategory(moduleCategory)
-        setId(-30l)
-
-        protected def acceptCategorized(entity: PersonWrapper, categorized: Song) = categorized.getChoreographers.exists {
-          p => ((p.getPerson ne null) && (entity.getPerson ne null) && (p.getPerson.getId == entity.getPerson.getId)) ||
-            (p.getPersonName == entity.getPersonName)
-        }
-      },
-      new PersonWrapperDynamicCategory[Song](LocaleManager.getString("interpretation"), "select s.interpreters from Song s") {
-        setParentCategory(moduleCategory)
-        setId(-40l)
-
-        protected def acceptCategorized(entity: PersonWrapper, categorized: Song) = categorized.getInterpreters.exists {
-          p => ((p.getPerson ne null) && (entity.getPerson ne null) && (p.getPerson.getId == entity.getPerson.getId)) ||
-            (p.getPersonName == entity.getPersonName)
-        }
-      },
-      new EnsembleGroupDynamicCategory(moduleCategory) {
-        setId(-50l)
-
-        override def acceptEnsembleGroup(categorized: Categorized, groupType: Int) = categorized.asInstanceOf[Song].getInterpreters.exists {
-          p => (p.getPerson ne null) && super.acceptEnsembleGroup(p.getPerson, groupType)
-        }
-      },
-      new EntityDynamicCategory[Programme, Song](LocaleManager.getString("programme"),
-        "select p from Programme p where size(p.programmeSongs)>0") {
-        setParentCategory(moduleCategory)
-        setId(-60l)
-
-        protected def acceptCategorized(entity: Programme, categorized: Song) = entity.getProgrammeSongs.exists {
-          ps => ps.getSong.getId == categorized.getId
-        }
-      },
-      new EnumerationDynamicCategory(Enumerations.SONG_GENRE) {
-        setParentCategory(moduleCategory)
-        setId(-70l)
-
-        def acceptEntryText(entryText: String, categorized: Categorized) =
-          entryText.equalsIgnoreCase(categorized.asInstanceOf[Song].getGenre)
-      },
-      new EnumerationDynamicCategory(Enumerations.FOLK_REGION) {
-        setParentCategory(moduleCategory)
-        setId(-80l)
-
-        def acceptEntryText(entryText: String, categorized: Categorized) =
-          entryText.equalsIgnoreCase(categorized.asInstanceOf[Song].getRegion)
-      }
-    )
-  }
-
   override def startUp(): Unit = {
     LocaleManager.registerBundleBaseName(bundleBaseName)
-    EntityFactory.getInstance.registerEntityProperties(classOf[Song], classOf[SongHistoryData])
     EntityPropertyTranslatorManager.registerTranslator(classOf[Song], new SongPropertyTranslator)
     ImExManager.registerImportProcessor(classOf[Song], new SongImportResolver)
     ControlPanelRegistry.registerInfoPanels(classOf[Song].getName, List(
@@ -126,6 +48,93 @@ class RepertoryModule extends AbstractModule {
       classOf[CategorizedRepertoryInfoPanel],
       classOf[HistoryInfoPanel]
     ))
+
+    initDynamicCategories()
+  }
+
+  private def initDynamicCategories(): Unit = {
+    val moduleCategory = CategoryManager.getInstance().getRootCategory(classOf[RepertoryModule], false)
+
+    registerDynamicCategory(new PersonWrapperDynamicCategory[Song](LocaleManager.getString("musicComposing"), "select s.composers from Song s") {
+      setParentCategory(moduleCategory)
+      setId(-10l)
+
+      protected def acceptCategorized(entity: PersonWrapper, categorized: Song) = categorized.getComposers.exists {
+        p => ((p.getPerson ne null) && (entity.getPerson ne null) && (p.getPerson.getId == entity.getPerson.getId)) ||
+          (p.getPersonName == entity.getPersonName)
+      }
+    })
+    registerDynamicCategory(new PersonWrapperDynamicCategory[Song](LocaleManager.getString("pedagogists"), "select s.pedagogists from Song s") {
+      setParentCategory(moduleCategory)
+      setId(-20l)
+
+      protected def acceptCategorized(entity: PersonWrapper, categorized: Song) = categorized.getPedagogists.exists {
+        p => ((p.getPerson ne null) && (entity.getPerson ne null) && (p.getPerson.getId == entity.getPerson.getId)) ||
+          (p.getPersonName == entity.getPersonName)
+      }
+    })
+    registerDynamicCategory(new PersonWrapperDynamicCategory[Song](LocaleManager.getString("choreography"), "select s.choreographers from Song s") {
+      setParentCategory(moduleCategory)
+      setId(-30l)
+
+      protected def acceptCategorized(entity: PersonWrapper, categorized: Song) = categorized.getChoreographers.exists {
+        p => ((p.getPerson ne null) && (entity.getPerson ne null) && (p.getPerson.getId == entity.getPerson.getId)) ||
+          (p.getPersonName == entity.getPersonName)
+      }
+    })
+    registerDynamicCategory(new PersonWrapperDynamicCategory[Song](LocaleManager.getString("interpretation"), "select s.interpreters from Song s") {
+      setParentCategory(moduleCategory)
+      setId(-40l)
+
+      protected def acceptCategorized(entity: PersonWrapper, categorized: Song) = categorized.getInterpreters.exists {
+        p => ((p.getPerson ne null) && (entity.getPerson ne null) && (p.getPerson.getId == entity.getPerson.getId)) ||
+          (p.getPersonName == entity.getPersonName)
+      }
+    })
+    registerDynamicCategory(new EnsembleGroupDynamicCategory(moduleCategory) {
+      setId(-50l)
+
+      override def acceptEnsembleGroup(categorized: Categorized, groupType: Int) = categorized.asInstanceOf[Song].getInterpreters.exists {
+        p => (p.getPerson ne null) && super.acceptEnsembleGroup(p.getPerson, groupType)
+      }
+    })
+    registerDynamicCategory(new EntityDynamicCategory[Programme, Song](LocaleManager.getString("programme"),
+      "select p from Programme p where size(p.programmeSongs)>0") {
+      setParentCategory(moduleCategory)
+      setId(-60l)
+
+      protected def acceptCategorized(entity: Programme, categorized: Song) = entity.getProgrammeSongs.exists {
+        ps => ps.getSong.getId == categorized.getId
+      }
+    })
+    registerDynamicCategory(new EnumerationDynamicCategory(Enumerations.SONG_GENRE) {
+      setParentCategory(moduleCategory)
+      setId(-70l)
+
+      def acceptEntryText(entryText: String, categorized: Categorized) =
+        entryText.equalsIgnoreCase(categorized.asInstanceOf[Song].getGenre)
+    })
+    registerDynamicCategory(new EnumerationDynamicCategory(Enumerations.FOLK_REGION) {
+      setParentCategory(moduleCategory)
+      setId(-80l)
+
+      def acceptEntryText(entryText: String, categorized: Categorized) =
+        entryText.equalsIgnoreCase(categorized.asInstanceOf[Song].getRegion)
+    })
+
+    val memberModule = SodalisManager.moduleManager.getModuleByClass(classOf[MemberModule])
+    if (memberModule != null) {
+      val memberModuleCategory = CategoryManager.getInstance().getRootCategory(classOf[MemberModule], false)
+      memberModule.registerDynamicCategory(new EntityDynamicCategory[Song, Person](LocaleManager.getString("songInterpretation"), "select s from Song s where size(s.interpreters)>0") {
+        id = -1l
+        parentCategory = memberModuleCategory
+
+        def acceptCategorized(entity: Song, categorized: Person) =
+          entity.getInterpreters.exists {
+            pw => (pw.getPerson ne null) && (pw.getPerson.id == categorized.getId)
+          }
+      })
+    }
   }
 
   def getDataListener = RepertoryContextManager.getInstance()
@@ -133,13 +142,6 @@ class RepertoryModule extends AbstractModule {
   def getContextManager = RepertoryContextManager.getInstance()
 
   def getModuleDescriptor = moduleDescriptor
-
-  override def getDynamicCategories = {
-    dynamicCategories.foreach {
-      _.refresh()
-    }
-    super.getDynamicCategories ++ dynamicCategories
-  }
 
   override def initConfiguration(configuration: Configuration): Unit = {
     configuration.addURL(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/repertory/data/mapping/repertory.hbm.xml"))

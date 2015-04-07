@@ -5,16 +5,15 @@ import javax.swing.ImageIcon
 import org.hibernate.cfg.Configuration
 import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
 import sk.magiksoft.sodalis.core.data.DBManager
-import sk.magiksoft.sodalis.core.factory.EntityFactory
 import sk.magiksoft.sodalis.core.history.HistoryInfoPanel
 import sk.magiksoft.sodalis.core.imex.ImExManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.module.{AbstractModule, ModuleDescriptor, VisibleModule}
-import sk.magiksoft.sodalis.event.data.EventDataManager
-import sk.magiksoft.sodalis.folkensemble.inventory.data.{InventoryDataManager, BorrowerDynamicCategory}
-import sk.magiksoft.sodalis.folkensemble.inventory.entity.{BorrowingInventoryItemData, InventoryHistoryData, InventoryItem}
+import sk.magiksoft.sodalis.folkensemble.inventory.data.{BorrowerDynamicCategory, InventoryDataManager}
+import sk.magiksoft.sodalis.folkensemble.inventory.entity.InventoryItem
 import sk.magiksoft.sodalis.folkensemble.inventory.ui.{BorrowingInfoPanel, CategorizedInventoryInfoPanel}
 import sk.magiksoft.sodalis.item.ui.ItemInfoPanel
+
 import scala.collection.JavaConversions._
 
 /**
@@ -34,7 +33,6 @@ class InventoryModule extends AbstractModule {
 
 
   override def startUp(): Unit = {
-    EntityFactory.getInstance.registerEntityProperties(classOf[InventoryItem], classOf[BorrowingInventoryItemData], classOf[InventoryHistoryData])
     LocaleManager.registerBundleBaseName("sk.magiksoft.sodalis.item.locale.item")
     LocaleManager.registerBundleBaseName("sk.magiksoft.sodalis.folkensemble.locale.inventory")
     ControlPanelRegistry.registerInfoPanels(classOf[InventoryItem].getName, List(

@@ -1,18 +1,19 @@
 package sk.magiksoft.sodalis.form.action
 
-import java.util.List
 import java.awt.event.ActionEvent
+import java.util
+
+import sk.magiksoft.sodalis.core.SodalisApplication
 import sk.magiksoft.sodalis.core.action.{ActionMessage, MessageAction}
 import sk.magiksoft.sodalis.core.locale.LocaleManager
-import sk.magiksoft.sodalis.form.ui.FormInfoPanel
-import sk.magiksoft.sodalis.form.entity.Form
-import sk.magiksoft.sodalis.icon.IconManager
-import swing.Swing
-import sk.magiksoft.sodalis.form.FormDataManager
-import sk.magiksoft.sodalis.core.factory.EntityFactory
-import sk.magiksoft.sodalis.core.utils.UIUtils
 import sk.magiksoft.sodalis.core.ui.OkCancelDialog
-import sk.magiksoft.sodalis.core.SodalisApplication
+import sk.magiksoft.sodalis.core.utils.UIUtils
+import sk.magiksoft.sodalis.form.FormDataManager
+import sk.magiksoft.sodalis.form.entity.Form
+import sk.magiksoft.sodalis.form.ui.FormInfoPanel
+import sk.magiksoft.sodalis.icon.IconManager
+
+import scala.swing.Swing
 
 /**
  * @author wladimiiir
@@ -23,14 +24,14 @@ class AddFormAction extends MessageAction(null, IconManager.getInstance.getIcon(
   private var formDialog: Option[OkCancelDialog] = None
   private var formInfoPanel: Option[FormInfoPanel] = None
 
-  def getActionMessage(objects: List[_]) = new ActionMessage(true, LocaleManager.getString("addForm"))
+  def getActionMessage(objects: util.List[_]) = new ActionMessage(true, LocaleManager.getString("addForm"))
 
   def actionPerformed(e: ActionEvent) = {
-    val form = EntityFactory.getInstance.createEntity(classOf[Form])
+    val form = new Form()
 
     formInfoPanel match {
       case Some(infoPanel) => {
-        infoPanel.initLayout
+        infoPanel.initLayout()
         infoPanel.setupPanel(form)
         infoPanel.initData
       }
@@ -51,7 +52,7 @@ class AddFormAction extends MessageAction(null, IconManager.getInstance.getIcon(
 
         formInfoPanel = Option(infoPanel)
         formDialog = Option(dialog)
-        infoPanel.initLayout
+        infoPanel.initLayout()
       }
     }
 
