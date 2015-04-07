@@ -3,7 +3,9 @@
   ~ Copyright (c) 2011
   -->
 
-<!DOCTYPE hibernate-mapping SYSTEM "hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="sk.magiksoft.sodalis.service.entity.Service" table="Service">
         <id column="id" name="id">
