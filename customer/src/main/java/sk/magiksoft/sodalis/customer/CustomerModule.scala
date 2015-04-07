@@ -43,7 +43,7 @@ class CustomerModule extends AbstractPersonModule {
 
   override def registerDynamicCategory(dynamicCategory: Category): Unit = {}
 
-  override def preInstall(dbManager: DBManager): Unit = {
+  override def prepareDB(dbManager: DBManager): Unit = {
     dbManager.createDBSchema(this)
   }
 

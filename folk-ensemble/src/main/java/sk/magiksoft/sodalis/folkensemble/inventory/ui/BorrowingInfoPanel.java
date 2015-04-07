@@ -2,14 +2,15 @@ package sk.magiksoft.sodalis.folkensemble.inventory.ui;
 
 import org.jdesktop.jxlayer.JXLayer;
 import org.jdesktop.jxlayer.plaf.ext.LockableUI;
+import sk.magiksoft.sodalis.core.SodalisApplication;
 import sk.magiksoft.sodalis.core.action.ContextTransferAction;
 import sk.magiksoft.sodalis.core.context.Context;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.core.data.DataListener;
 import sk.magiksoft.sodalis.core.entity.DatabaseEntity;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.ui.ISOptionPane;
 import sk.magiksoft.sodalis.core.ui.OkCancelDialog;
-import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.core.utils.UIUtils;
 import sk.magiksoft.sodalis.folkensemble.inventory.data.InventoryDataManager;
 import sk.magiksoft.sodalis.folkensemble.inventory.entity.Borrowing;
@@ -28,7 +29,6 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -265,13 +265,7 @@ public class BorrowingInfoPanel extends AbstractInfoPanel implements DataListene
         @Override
         public void actionPerformed(ActionEvent e) {
             OkCancelDialog okCancelDialog = new OkCancelDialog();
-            okCancelDialog.getOkButton().addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    createBorrowing();
-                }
-            });
+            okCancelDialog.getOkButton().addActionListener(e1 -> createBorrowing());
             borrowingCreationPanel = new BorrowingCreationPanel(currentInventoryItem, okCancelDialog);
             okCancelDialog.setTitle(LocaleManager.getString("newBorrowing"));
             okCancelDialog.setModal(true);
@@ -336,7 +330,7 @@ public class BorrowingInfoPanel extends AbstractInfoPanel implements DataListene
             }
 
             DateSpinner dateSpinner = new DateSpinner("d.M.yyyy");
-            int result = ISOptionPane.showConfirmDialog(null, new Object[]{LocaleManager.getString("returnToDay") + ":", dateSpinner},
+            int result = ISOptionPane.showConfirmDialog(SodalisApplication.get().getMainFrame(), new Object[]{LocaleManager.getString("returnToDay") + ":", dateSpinner},
                     LocaleManager.getString("returnBorrowing"), ISOptionPane.OK_CANCEL_OPTION);
 
             if (result != ISOptionPane.OK_OPTION) {

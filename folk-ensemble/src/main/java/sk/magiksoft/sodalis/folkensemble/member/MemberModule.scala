@@ -90,15 +90,15 @@ class MemberModule extends AbstractModule with PersonModule {
     IconManager.getInstance().registerIcons(getClass.getResource("/sk/magiksoft/sodalis/folkensemble/icon/icons.properties"))
 
     ControlPanelRegistry.registerInfoPanels(MemberControlPanel.KEY, List(
-        classOf[MemberPersonalDataInfoPanel],
-          classOf[UniversityDataInfoPanel],
-          classOf[EnsembleDataPanel],
-          classOf[CategorizedMemberInfoPanel],
-          classOf[MemberSongInfoPanel],
-          classOf[MemberInventoryItemInfoPanel],
-          classOf[NoteInfoPanel],
-          classOf[EventTableInfoPanel],
-          classOf[MemberHistoryInfoPanel]
+      classOf[MemberPersonalDataInfoPanel],
+      classOf[UniversityDataInfoPanel],
+      classOf[EnsembleDataPanel],
+      classOf[CategorizedMemberInfoPanel],
+      classOf[MemberSongInfoPanel],
+      classOf[MemberInventoryItemInfoPanel],
+      classOf[NoteInfoPanel],
+      classOf[EventTableInfoPanel],
+      classOf[MemberHistoryInfoPanel]
     ))
   }
 

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author wladimiiir
  */
-public class InventoryDataManager extends ClientDataManager {
+public class    InventoryDataManager extends ClientDataManager {
 
     private static InventoryDataManager instance;
 

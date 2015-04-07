@@ -6,6 +6,7 @@ import action.RetrieveFileAction
 import entity.FTPEntry
 import javax.swing.ImageIcon
 import org.hibernate.cfg.Configuration
+import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
 import sk.magiksoft.sodalis.core.data.DBManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.registry.RegistryManager

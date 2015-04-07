@@ -4,6 +4,7 @@ import java.util.ResourceBundle
 import javax.swing.ImageIcon
 
 import org.hibernate.cfg.Configuration
+import sk.magiksoft.sodalis.category.ui.CategoryInfoPanel
 import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
@@ -12,7 +13,7 @@ import sk.magiksoft.sodalis.icon.IconManager
 import sk.magiksoft.sodalis.person.entity.Person
 import sk.magiksoft.sodalis.service.entity.Service
 import sk.magiksoft.sodalis.service.entity.property.ServicePropertyTranslator
-import sk.magiksoft.sodalis.service.ui.{PersonServiceInfoPanel, ServiceInfoPanel}
+import sk.magiksoft.sodalis.service.ui.{CategorizedServiceInfoPanel, PersonServiceInfoPanel, ServiceInfoPanel}
 
 /**
  * @author wladimiiir
@@ -21,16 +22,19 @@ import sk.magiksoft.sodalis.service.ui.{PersonServiceInfoPanel, ServiceInfoPanel
 @VisibleModule
 class ServiceModule extends AbstractModule {
   private val bundleBaseName = "sk.magiksoft.sodalis.service.locale.service"
-  private lazy val moduleDescriptor = new ModuleDescriptor(IconManager.getInstance.getIcon("services").asInstanceOf[ImageIcon],
-    ResourceBundle.getBundle(bundleBaseName).getString("services"))
+  private lazy val moduleDescriptor = new ModuleDescriptor(
+    IconManager.getInstance.getIcon("services").asInstanceOf[ImageIcon],
+    ResourceBundle.getBundle(bundleBaseName).getString("services")
+  )
 
   override def startUp(): Unit = {
     LocaleManager.registerBundleBaseName(bundleBaseName)
     EntityPropertyTranslatorManager.registerTranslator(classOf[Service], new ServicePropertyTranslator)
-    IconManager.getInstance().registerIcons(getClass.getResource("icon/icon.properties"))
+    IconManager.getInstance().registerIcons(getClass.getResource("icon/icons.properties"))
 
     ControlPanelRegistry.registerInfoPanels(classOf[Service].getName, List(
-      classOf[ServiceInfoPanel]
+      classOf[ServiceInfoPanel],
+      classOf[CategorizedServiceInfoPanel]
     ))
     ControlPanelRegistry.registerInfoPanels(classOf[Person].getName, List(
       classOf[PersonServiceInfoPanel]

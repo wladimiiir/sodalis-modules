@@ -6,11 +6,13 @@ import entity.property.EventPropertyTranslator
 import entity.{Event, EventEntityData, EventHistoryData}
 import org.hibernate.cfg.Configuration
 import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
+import sk.magiksoft.sodalis.core.history.HistoryInfoPanel
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.factory.EntityFactory
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
+import sk.magiksoft.sodalis.event.ui.{CategorizedEventInfoPanel, EventInfoPanel}
 import sk.magiksoft.sodalis.icon.IconManager
 import sk.magiksoft.sodalis.person.entity.Person
 
@@ -33,7 +35,11 @@ class EventModule extends AbstractModule {
     EntityPropertyTranslatorManager.registerTranslator(classOf[Event], new EventPropertyTranslator)
     IconManager.getInstance().registerIcons(getClass.getResource("/sk/magiksoft/sodalis/event/icon/icons.properties"))
 
-    ControlPanelRegistry.registerInfoPanels(Event)
+    ControlPanelRegistry.registerInfoPanels(classOf[Event].getName, List(
+      classOf[EventInfoPanel],
+      classOf[CategorizedEventInfoPanel],
+      classOf[HistoryInfoPanel]
+    ))
   }
 
   override def initConfiguration(configuration: Configuration): Unit = {

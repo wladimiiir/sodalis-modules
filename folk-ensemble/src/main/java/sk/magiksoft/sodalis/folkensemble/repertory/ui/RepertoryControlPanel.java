@@ -10,7 +10,7 @@ import sk.magiksoft.sodalis.folkensemble.repertory.entity.Song;
 public class RepertoryControlPanel extends DefaultControlPanel {
 
     public RepertoryControlPanel() {
-        super("repertory");
+        super(Song.class.getName());
     }
 
     @Override

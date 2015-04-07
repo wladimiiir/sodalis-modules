@@ -11,11 +11,9 @@ import scala.collection.JavaConversions._
 
 object ServiceSettings extends Settings("ServiceSettings") {
 
-
-  def getDefaultSettingsMap = {
+  override protected def getDefaultSettingsMap = {
     Map(
       Settings.O_SELECTED_CATEGORIES -> Collections.emptyList
     )
   }
-
 }

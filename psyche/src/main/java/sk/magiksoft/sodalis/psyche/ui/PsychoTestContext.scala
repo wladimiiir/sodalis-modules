@@ -54,7 +54,7 @@ class PsychoTestContext extends AbstractTableContext(classOf[PsychoTest], new IS
     })
     scrollPane.getViewport.setBackground(ColorList.SCROLLPANE_BACKGROUND)
     initCategoryTreeComponent(classOf[PsychoTestModule], scrollPane)
-    controlPanel = new DefaultControlPanel("psychoTest")
+    controlPanel = new DefaultControlPanel(classOf[PsychoTest].getName)
     categoryTreeComboBox = new CategoryTreeComboBox(classOf[PsychoTestModule])
     categoryTreeComboBox.addChangeListener(new CategoryTreeComboBoxChangeListener(PsychoTestSettings, PsycheContextManager))
 

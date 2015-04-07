@@ -6,12 +6,16 @@ import javax.swing.ImageIcon
 import org.hibernate.cfg.Configuration
 import sk.magiksoft.sodalis.category.CategoryManager
 import sk.magiksoft.sodalis.category.entity.EntityDynamicCategory
+import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
 import sk.magiksoft.sodalis.core.factory.EntityFactory
+import sk.magiksoft.sodalis.core.history.HistoryInfoPanel
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.module.{AbstractModule, ModuleDescriptor, VisibleModule}
+import sk.magiksoft.sodalis.event.ui.CategorizedEventInfoPanel
 import sk.magiksoft.sodalis.folkensemble.programme.entity.property.ProgrammePropertyTranslator
 import sk.magiksoft.sodalis.folkensemble.programme.entity.{Programme, ProgrammeHistoryData, ProgrammeSong}
+import sk.magiksoft.sodalis.folkensemble.programme.ui.{ProgrammeEventInfoPanel, CategorizedProgrammeInfoPanel, ProgrammeSongInfoPanel, ProgrammeInfoPanel}
 import sk.magiksoft.sodalis.person.data.PersonWrapperDynamicCategory
 import sk.magiksoft.sodalis.person.entity.PersonWrapper
 
@@ -89,6 +93,13 @@ class ProgrammeModule extends AbstractModule {
     LocaleManager.registerBundleBaseName(bundleBaseName)
     EntityFactory.getInstance.registerEntityProperties(classOf[Programme], classOf[ProgrammeHistoryData])
     EntityPropertyTranslatorManager.registerTranslator(classOf[Programme], new ProgrammePropertyTranslator)
+    ControlPanelRegistry.registerInfoPanels(classOf[Programme].getName, List(
+      classOf[ProgrammeInfoPanel],
+      classOf[ProgrammeSongInfoPanel],
+      classOf[CategorizedProgrammeInfoPanel],
+      classOf[ProgrammeEventInfoPanel],
+      classOf[HistoryInfoPanel]
+    ))
   }
 
   def getDataListener = ProgrammeContextManager.getInstance()

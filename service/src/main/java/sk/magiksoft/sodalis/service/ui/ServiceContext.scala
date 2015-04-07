@@ -42,7 +42,7 @@ class ServiceContext extends AbstractTableContext(classOf[Service], new ISTable(
 
     scrollPane.getViewport.setBackground(ColorList.SCROLLPANE_BACKGROUND)
     initCategoryTreeComponent(classOf[ServiceModule], scrollPane)
-    controlPanel = new DefaultControlPanel("service")
+    controlPanel = new DefaultControlPanel(classOf[Service].getName)
     categoryTreeComboBox = new CategoryTreeComboBox(classOf[ServiceModule])
     categoryTreeComboBox.addChangeListener(new CategoryTreeComboBoxChangeListener(ServiceSettings, ServiceContextManager))
 

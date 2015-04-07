@@ -15,36 +15,12 @@ import java.util.Comparator;
  * @author wladimiiir
  */
 public class MemberTableModel extends ObjectTableModel<Person> {
-    private static final Comparator<Person> FIRSTNAME_COMPARATOR = new Comparator<Person>() {
-
-        @Override
-        public int compare(Person o1, Person o2) {
-            return Collator.getInstance().compare(o1.getFirstName(), o2.getFirstName());
-        }
-    };
-    private static final Comparator<Person> LASTNAME_COMPARATOR = new Comparator<Person>() {
-
-        @Override
-        public int compare(Person o1, Person o2) {
-            return Collator.getInstance().compare(o1.getLastName(), o2.getLastName());
-        }
-    };
-    private static final Comparator<Person> DATEOFBIRTH_COMPARATOR = new Comparator<Person>() {
-
-        @Override
-        public int compare(Person o1, Person o2) {
-            return o1.getPersonData(PrivatePersonData.class).getBirthDate()
-                    .compareTo(o2.getPersonData(PrivatePersonData.class).getBirthDate());
-        }
-    };
-    private static final Comparator<Person> GROUP_COMPARATOR = new Comparator<Person>() {
-
-        @Override
-        public int compare(Person o1, Person o2) {
-            return Collator.getInstance().compare(o1.getPersonData(EnsembleData.class).getEnsembleGroup().getGroupTypeToString(),
-                    o2.getPersonData(EnsembleData.class).getEnsembleGroup().getGroupTypeToString());
-        }
-    };
+    private static final Comparator<Person> FIRSTNAME_COMPARATOR = (o1, o2) -> Collator.getInstance().compare(o1.getFirstName(), o2.getFirstName());
+    private static final Comparator<Person> LASTNAME_COMPARATOR = (o1, o2) -> Collator.getInstance().compare(o1.getLastName(), o2.getLastName());
+    private static final Comparator<Person> DATEOFBIRTH_COMPARATOR = (o1, o2) -> o1.getPersonData(PrivatePersonData.class).getBirthDate()
+            .compareTo(o2.getPersonData(PrivatePersonData.class).getBirthDate());
+    private static final Comparator<Person> GROUP_COMPARATOR = (o1, o2) -> Collator.getInstance().compare(o1.getPersonData(EnsembleData.class).getEnsembleGroup().getGroupTypeToString(),
+            o2.getPersonData(EnsembleData.class).getEnsembleGroup().getGroupTypeToString());
 
 
     private static final String[] columnNames = new String[]{

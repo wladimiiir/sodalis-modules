@@ -10,7 +10,7 @@ import sk.magiksoft.sodalis.folkensemble.programme.entity.Programme;
 public class ProgrammeControlPanel extends DefaultControlPanel {
 
     public ProgrammeControlPanel() {
-        super("programme");
+        super(Programme.class.getName());
     }
 
     @Override

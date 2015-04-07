@@ -3,11 +3,19 @@ package sk.magiksoft.sodalis.folkensemble.inventory
 import javax.swing.ImageIcon
 
 import org.hibernate.cfg.Configuration
+import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
+import sk.magiksoft.sodalis.core.data.DBManager
 import sk.magiksoft.sodalis.core.factory.EntityFactory
+import sk.magiksoft.sodalis.core.history.HistoryInfoPanel
+import sk.magiksoft.sodalis.core.imex.ImExManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
 import sk.magiksoft.sodalis.core.module.{AbstractModule, ModuleDescriptor, VisibleModule}
-import sk.magiksoft.sodalis.folkensemble.inventory.data.BorrowerDynamicCategory
+import sk.magiksoft.sodalis.event.data.EventDataManager
+import sk.magiksoft.sodalis.folkensemble.inventory.data.{InventoryDataManager, BorrowerDynamicCategory}
 import sk.magiksoft.sodalis.folkensemble.inventory.entity.{BorrowingInventoryItemData, InventoryHistoryData, InventoryItem}
+import sk.magiksoft.sodalis.folkensemble.inventory.ui.{BorrowingInfoPanel, CategorizedInventoryInfoPanel}
+import sk.magiksoft.sodalis.item.ui.ItemInfoPanel
+import scala.collection.JavaConversions._
 
 /**
  * @author wladimiiir
@@ -29,6 +37,12 @@ class InventoryModule extends AbstractModule {
     EntityFactory.getInstance.registerEntityProperties(classOf[InventoryItem], classOf[BorrowingInventoryItemData], classOf[InventoryHistoryData])
     LocaleManager.registerBundleBaseName("sk.magiksoft.sodalis.item.locale.item")
     LocaleManager.registerBundleBaseName("sk.magiksoft.sodalis.folkensemble.locale.inventory")
+    ControlPanelRegistry.registerInfoPanels(classOf[InventoryItem].getName, List(
+      classOf[ItemInfoPanel],
+      classOf[CategorizedInventoryInfoPanel],
+      classOf[BorrowingInfoPanel],
+      classOf[HistoryInfoPanel]
+    ))
   }
 
   def getDataListener = InventoryContextManager
@@ -36,6 +50,11 @@ class InventoryModule extends AbstractModule {
   def getContextManager = InventoryContextManager
 
   def getModuleDescriptor = moduleDescriptor
+
+
+  override def install(dBManager: DBManager): Unit = {
+    InventoryDataManager.getInstance().addOrUpdateEntities(ImExManager.importFromStream(getClass.getResourceAsStream("/sk/magiksoft/sodalis/folkensemble/inventory/imex/inventory_item_types.xml")))
+  }
 
   override def getDynamicCategories = {
     dynamicCategories.foreach {

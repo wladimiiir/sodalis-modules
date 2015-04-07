@@ -8,7 +8,9 @@ import imex.SongImportResolver
 import org.hibernate.cfg.Configuration
 import org.hibernate.tool.hbm2ddl.{Target, SchemaExport}
 import sk.magiksoft.sodalis.core.SodalisApplication
+import sk.magiksoft.sodalis.core.controlpanel.ControlPanelRegistry
 import sk.magiksoft.sodalis.core.data.DBManager
+import sk.magiksoft.sodalis.core.history.HistoryInfoPanel
 import sk.magiksoft.sodalis.core.module.{VisibleModule, ModuleDescriptor, AbstractModule}
 import javax.swing.ImageIcon
 import sk.magiksoft.sodalis.core.locale.LocaleManager
@@ -16,6 +18,7 @@ import sk.magiksoft.sodalis.category.CategoryManager
 import sk.magiksoft.sodalis.core.factory.EntityFactory
 import sk.magiksoft.sodalis.core.entity.property.EntityPropertyTranslatorManager
 import sk.magiksoft.sodalis.core.imex.ImExManager
+import sk.magiksoft.sodalis.folkensemble.repertory.ui.{CategorizedRepertoryInfoPanel, InterpretationInfoPanel, SongInfoPanel}
 import sk.magiksoft.sodalis.icon.IconManager
 import sk.magiksoft.sodalis.person.data.PersonWrapperDynamicCategory
 import sk.magiksoft.sodalis.person.entity.PersonWrapper
@@ -117,6 +120,12 @@ class RepertoryModule extends AbstractModule {
     EntityFactory.getInstance.registerEntityProperties(classOf[Song], classOf[SongHistoryData])
     EntityPropertyTranslatorManager.registerTranslator(classOf[Song], new SongPropertyTranslator)
     ImExManager.registerImportProcessor(classOf[Song], new SongImportResolver)
+    ControlPanelRegistry.registerInfoPanels(classOf[Song].getName, List(
+      classOf[SongInfoPanel],
+      classOf[InterpretationInfoPanel],
+      classOf[CategorizedRepertoryInfoPanel],
+      classOf[HistoryInfoPanel]
+    ))
   }
 
   def getDataListener = RepertoryContextManager.getInstance()
