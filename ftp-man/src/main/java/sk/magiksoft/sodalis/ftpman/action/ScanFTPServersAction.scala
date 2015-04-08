@@ -2,6 +2,7 @@ package sk.magiksoft.sodalis.ftpman.action
 
 import javax.swing.{Action, AbstractAction}
 import java.awt.event.ActionEvent
+import sk.magiksoft.sodalis.core.SodalisApplication
 import sk.magiksoft.sodalis.ftpman.ui.FTPScanCriteriaPanel
 import sk.magiksoft.sodalis.ftpman.FTPManager
 import sk.magiksoft.sodalis.core.locale.LocaleManager
@@ -19,7 +20,7 @@ class ScanFTPServersAction extends AbstractAction("", IconManager.getInstance().
   private lazy val dialog = new OkCancelDialog(LocaleManager.getString("scanCriteria")) {
     setMainPanel(criteriaPanel.peer)
     setSize(320, 240)
-    setLocationRelativeTo(null)
+    setLocationRelativeTo(SodalisApplication.get().getMainFrame)
     getOkButton.addActionListener(Swing.ActionListener {
       e => {
         setVisible(false)

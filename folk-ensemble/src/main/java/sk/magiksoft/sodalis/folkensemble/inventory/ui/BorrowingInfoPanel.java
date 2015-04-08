@@ -272,7 +272,7 @@ public class BorrowingInfoPanel extends AbstractInfoPanel implements DataListene
             okCancelDialog.setMainPanel(borrowingCreationPanel);
             UIUtils.makeISDialog(okCancelDialog);
             okCancelDialog.setSize(450, 350);
-            okCancelDialog.setLocationRelativeTo(null);
+            okCancelDialog.setLocationRelativeTo(SodalisApplication.get().getMainFrame());
             okCancelDialog.setVisible(true);
         }
 

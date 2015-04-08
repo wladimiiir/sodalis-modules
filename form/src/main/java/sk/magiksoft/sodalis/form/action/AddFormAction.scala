@@ -43,7 +43,7 @@ class AddFormAction extends MessageAction(null, IconManager.getInstance.getIcon(
         dialog.setSize(400, 300)
         dialog.setModal(true)
         dialog.setTitle(LocaleManager.getString("addForm"))
-        dialog.setLocationRelativeTo(null)
+        dialog.setLocationRelativeTo(SodalisApplication.get().getMainFrame)
         dialog.getOkButton.addActionListener(Swing.ActionListener(e => {
           infoPanel.setupObject(form)
           FormDataManager.addDatabaseEntity(form)

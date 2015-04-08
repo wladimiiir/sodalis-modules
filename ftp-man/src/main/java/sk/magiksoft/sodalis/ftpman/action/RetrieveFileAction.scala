@@ -63,7 +63,7 @@ class RetrieveFileAction extends EntityAction[FTPEntry] {
             add(progressBar.peer, BorderLayout.CENTER)
             add(cancelButton.peer, BorderLayout.SOUTH)
             setSize(200, 58)
-            setLocationRelativeTo(null)
+            setLocationRelativeTo(SodalisApplication.get().getMainFrame)
           }
           progressBar.labelPainted = true
           publisher.reactions += {

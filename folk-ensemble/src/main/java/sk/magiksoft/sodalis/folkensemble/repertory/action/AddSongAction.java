@@ -2,6 +2,7 @@ package sk.magiksoft.sodalis.folkensemble.repertory.action;
 
 import sk.magiksoft.sodalis.category.CategoryDataManager;
 import sk.magiksoft.sodalis.category.entity.Category;
+import sk.magiksoft.sodalis.core.SodalisApplication;
 import sk.magiksoft.sodalis.core.action.ActionMessage;
 import sk.magiksoft.sodalis.core.action.MessageAction;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
@@ -45,7 +46,7 @@ public class AddSongAction extends MessageAction {
         songInfoPanel.setupPanel(song);
         songInfoPanel.initData();
 
-        dialog.setLocationRelativeTo(null);
+        dialog.setLocationRelativeTo(SodalisApplication.get().getMainFrame());
         dialog.setVisible(true);
     }
 

@@ -30,7 +30,7 @@ class AddServiceAction extends MessageAction(IconManager.getInstance.getIcon("ad
     setMainPanel(infoPanel.getComponentPanel)
     setModal(true)
     setSize(400, 300)
-    setLocationRelativeTo(null)
+    setLocationRelativeTo(SodalisApplication.get().getMainFrame)
   }
 
   def getActionMessage(objects: util.List[_]) = new ActionMessage(true, LocaleManager.getString("addService"))

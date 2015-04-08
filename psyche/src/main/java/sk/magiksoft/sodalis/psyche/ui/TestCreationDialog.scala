@@ -1,28 +1,26 @@
 package sk.magiksoft.sodalis.psyche.ui
 
-import sk.magiksoft.sodalis.psyche.data.PsycheDataManager
-import scala.swing.Swing._
-import com.toedter.calendar.{JTextFieldDateEditor, JDateChooser}
-import scala.swing.Component._
-import sk.magiksoft.sodalis.psyche.PsychoTestModule
-import sk.magiksoft.sodalis.core.SodalisApplication
-import sk.magiksoft.sodalis.person.PersonModule
-import sk.magiksoft.sodalis.core.module.Module
-import sk.magiksoft.sodalis.psyche.entity.{PsychoTestCreator, PsychoTest}
-import sk.magiksoft.sodalis.psyche.rorschach.entity.BlotAnswer
-import swing.ListView.{Renderer, IntervalMode}
-import scala.swing.event.{ListSelectionChanged, ValueChanged}
 import java.awt.Insets
-import java.awt.Container._
-import swing._
-import sk.magiksoft.sodalis.core.action.Checker
-import sk.magiksoft.sodalis.core.ui.{ISOptionPane, OkCancelDialog}
 import java.util.Calendar
-import scala.swing.GridBagPanel.{Fill, Anchor}
 import javax.swing.SwingUtilities
-import sk.magiksoft.sodalis.person.entity.PersonWrapper
+
+import com.toedter.calendar.{JDateChooser, JTextFieldDateEditor}
+import sk.magiksoft.sodalis.core.SodalisApplication
+import sk.magiksoft.sodalis.core.action.Checker
 import sk.magiksoft.sodalis.core.locale.LocaleManager
+import sk.magiksoft.sodalis.core.ui.{ISOptionPane, OkCancelDialog}
+import sk.magiksoft.sodalis.person.PersonModule
+import sk.magiksoft.sodalis.person.entity.PersonWrapper
 import sk.magiksoft.sodalis.person.ui.PersonChooserComponent
+import sk.magiksoft.sodalis.psyche.PsychoTestModule
+import sk.magiksoft.sodalis.psyche.data.PsycheDataManager
+import sk.magiksoft.sodalis.psyche.entity.{PsychoTest, PsychoTestCreator}
+
+import scala.swing.Component._
+import scala.swing.GridBagPanel.{Anchor, Fill}
+import scala.swing.ListView.{IntervalMode, Renderer}
+import scala.swing._
+import scala.swing.event.ListSelectionChanged
 
 /**
  * @author wladimiiir
@@ -115,6 +113,6 @@ class TestCreationDialog extends OkCancelDialog(LocaleManager.getString("psychoT
 
     setMainPanel(mainPanel.peer)
     setSize(400, 300)
-    setLocationRelativeTo(null)
+    setLocationRelativeTo(SodalisApplication.get().getMainFrame)
   }
 }

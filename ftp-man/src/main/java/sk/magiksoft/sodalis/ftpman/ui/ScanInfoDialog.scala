@@ -35,7 +35,7 @@ class ScanInfoDialog extends OkCancelDialog(LocaleManager.getString("scanning"))
   })
   setMainPanel(createMainPanel.peer)
   setSize(400, 300)
-  setLocationRelativeTo(null)
+  setLocationRelativeTo(SodalisApplication.get().getMainFrame)
   getOkButton.addActionListener(Swing.ActionListener {
     e => {
       val progressBar = new ProgressBar
@@ -44,7 +44,7 @@ class ScanInfoDialog extends OkCancelDialog(LocaleManager.getString("scanning"))
         setLayout(new BorderLayout)
         add(progressBar.peer, BorderLayout.CENTER)
         setSize(200, 21)
-        setLocationRelativeTo(null)
+        setLocationRelativeTo(SodalisApplication.get().getMainFrame)
       }
       val entries = new ListBuffer[FTPEntry]
 

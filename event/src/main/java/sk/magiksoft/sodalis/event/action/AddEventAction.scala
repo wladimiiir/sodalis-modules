@@ -56,7 +56,7 @@ class AddEventAction extends MessageAction(null, IconManager.getInstance.getIcon
   private def createWizard = {
     val wizard = new Wizard(SodalisApplication.get.getMainFrame, LocaleManager.getString("addEvent"), pages(0))
     wizard.setSize(740, 300)
-    wizard.setLocationRelativeTo(null)
+    wizard.setLocationRelativeTo(SodalisApplication.get().getMainFrame)
     wizard.reactions += {
       case WizardFinished(_) =>
         pages(0).infoPanel.setupObject(event)
