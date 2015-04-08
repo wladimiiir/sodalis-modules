@@ -2,17 +2,17 @@ package sk.magiksoft.sodalis.folkensemble.event.ui;
 
 import sk.magiksoft.sodalis.core.action.ContextTransferAction;
 import sk.magiksoft.sodalis.core.context.Context;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.core.entity.Entity;
 import sk.magiksoft.sodalis.core.factory.ColorList;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
 import sk.magiksoft.sodalis.core.table.ObjectTableModel;
 import sk.magiksoft.sodalis.core.ui.ISOptionPane;
-import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
-import sk.magiksoft.sodalis.event.EventModule;
 import sk.magiksoft.sodalis.event.data.EventTypeSubject;
+import sk.magiksoft.sodalis.event.entity.Event;
 import sk.magiksoft.sodalis.event.entity.EventEntityData;
 import sk.magiksoft.sodalis.event.entity.EventType;
-import sk.magiksoft.sodalis.event.entity.Event;
+import sk.magiksoft.sodalis.folkensemble.event.FolkEnsembleEventModule;
 import sk.magiksoft.sodalis.folkensemble.event.entity.EnsembleEventData;
 import sk.magiksoft.sodalis.folkensemble.member.MemberModule;
 import sk.magiksoft.sodalis.folkensemble.member.data.MemberDataManager;
@@ -151,7 +151,7 @@ public class ParticipantsInfoPanel extends AbstractInfoPanel {
     private class AddParticipantsAction extends ContextTransferAction {
 
         public AddParticipantsAction() {
-            super(EventModule.class, MemberModule.class);
+            super(FolkEnsembleEventModule.class, MemberModule.class);
             this.putValue(AbstractAction.NAME, LocaleManager.getString("add"));
         }
 

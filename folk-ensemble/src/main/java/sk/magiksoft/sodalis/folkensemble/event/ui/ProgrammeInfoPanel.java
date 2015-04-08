@@ -2,17 +2,16 @@ package sk.magiksoft.sodalis.folkensemble.event.ui;
 
 import sk.magiksoft.sodalis.core.action.ContextTransferAction;
 import sk.magiksoft.sodalis.core.context.Context;
+import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
 import sk.magiksoft.sodalis.core.factory.ColorList;
 import sk.magiksoft.sodalis.core.locale.LocaleManager;
-import sk.magiksoft.sodalis.core.controlpanel.AbstractInfoPanel;
-import sk.magiksoft.sodalis.event.EventModule;
 import sk.magiksoft.sodalis.event.data.EventTypeSubject;
 import sk.magiksoft.sodalis.event.entity.Event;
 import sk.magiksoft.sodalis.event.entity.EventType;
+import sk.magiksoft.sodalis.folkensemble.event.FolkEnsembleEventModule;
 import sk.magiksoft.sodalis.folkensemble.event.entity.EnsembleEventData;
 import sk.magiksoft.sodalis.folkensemble.programme.ProgrammeModule;
 import sk.magiksoft.sodalis.folkensemble.programme.entity.Programme;
-import sk.magiksoft.sodalis.folkensemble.programme.entity.ProgrammeSong;
 import sk.magiksoft.swing.ISTable;
 
 import javax.swing.*;
@@ -147,7 +146,7 @@ public class ProgrammeInfoPanel extends AbstractInfoPanel {
 
     private void refreshProgramme() {
         programmeTableModel.setObjects(programme == null
-                ? new ArrayList<ProgrammeSong>()
+                ? new ArrayList<>()
                 : programme.getProgrammeSongs());
         programmeScrollPane.setViewportView(programme == null ? new JPanel() : programmeTable);
         programmeScrollPane.setBorder(programme == null ? null : new JScrollPane().getBorder());
@@ -162,7 +161,7 @@ public class ProgrammeInfoPanel extends AbstractInfoPanel {
     private class ChooseProgrammeAction extends ContextTransferAction {
 
         public ChooseProgrammeAction() {
-            super(EventModule.class, ProgrammeModule.class);
+            super(FolkEnsembleEventModule.class, ProgrammeModule.class);
             putValue(Action.NAME, LocaleManager.getString("chooseProgram"));
         }
 
